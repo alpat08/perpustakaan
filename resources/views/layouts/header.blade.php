@@ -30,6 +30,15 @@
                             href="{{route('create')}}">Registrasi</a>
                     </li>
                 @endif
+                @if (Auth::check())
+                    <li class="nav-item">
+                        <form action="{{route('logout')}}" method="post">
+                            @csrf
+                            <button type="submit" class="nav-link fs-5"
+                                onclick="return confirm('Tetap logout?')">Logout</button>
+                        </form>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

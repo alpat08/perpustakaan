@@ -26,7 +26,7 @@
     <script src="{{asset('js/sweetalert2.min.js')}}"></script>
 
     <script>
-        @if (session()->has('berhasil'))
+        @if (session()->has('success'))
             Swal.fire({
                 title: 'Berhasil',
                 text: '{{session('success')}}',

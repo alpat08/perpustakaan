@@ -30,6 +30,7 @@ class LoginController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
+                'role' => 'siswa'
             ]);
 
             return redirect()->route('login')->with('success', 'Registrasi berhasil');
@@ -60,5 +61,11 @@ class LoginController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Login gagal');
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('public')->with('success', 'Berhasil logout');
     }
 }
