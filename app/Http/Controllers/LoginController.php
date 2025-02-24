@@ -52,7 +52,11 @@ class LoginController extends Controller
             }
 
             Auth::login($user);
-            return redirect()->route('dash')->with('success', 'Berhasil login');
+            if ($user->role === 'admin') {
+                return redirect()->route('admin')->with('success', 'Berhasil login');
+            } else {
+                return redirect()->route('dash')->with('success', 'Berhasil login');
+            }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Login gagal');
         }
