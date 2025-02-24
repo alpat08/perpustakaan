@@ -24,7 +24,6 @@ Route::middleware(['auth', 'role:siswa'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dash');
-
 });
 Route::middleware(['auth', 'role:admin,guru'])->group(function() {
 
