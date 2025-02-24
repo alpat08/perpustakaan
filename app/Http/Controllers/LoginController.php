@@ -53,7 +53,7 @@ class LoginController extends Controller
             }
 
             Auth::login($user);
-            if ($user->role === 'admin') {
+            if ($user->role === ['admin', 'guru']) {
                 return redirect()->route('admin')->with('success', 'Berhasil login');
             } else {
                 return redirect()->route('dash')->with('success', 'Berhasil login');
