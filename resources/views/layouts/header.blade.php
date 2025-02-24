@@ -16,10 +16,6 @@
                     <a class="nav-link fs-5 {{ request()->is('#') ? 'fw-bold text-primary' : 'text-dark' }}"
                         href="#">Beranda</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-5 {{ request()->is('#') ? 'fw-bold text-primary' : 'text-dark' }}"
-                        href="#">Buku</a>
-                </li>
                 @if (Auth::guest())
                     <li class="nav-item">
                         <a class="nav-link fs-5 {{ request()->is('login') ? 'fw-bold text-primary' : 'text-dark' }}"
