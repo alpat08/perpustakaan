@@ -5,7 +5,7 @@
         <div class="card rounded-4 shadow-sm p-3" style="max-width: 400px">
             <div class="card-body">
                 <h4 class="card-title text-center">Login</h4>
-                <form action="{{route('store')}}" method="post">
+                <form action="{{route('logins')}}" method="post">
                     @csrf
 
                     <div class="mb-3">

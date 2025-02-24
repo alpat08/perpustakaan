@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,9 @@
     <link rel="stylesheet" href="{{asset('bootstrap-icons/font/bootstrap-icons.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
 </head>
+
 <body class="bg-light">
-    
+
 
     @include('layouts.header')
 
@@ -22,5 +24,23 @@
     <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('js/jquery.min.js')}}"></script>
     <script src="{{asset('js/sweetalert2.min.js')}}"></script>
+
+    <script>
+        @if (session()->has('berhasil'))
+            Swal.fire({
+                title: 'Berhasil',
+                text: '{{session('success')}}',
+                icon: 'success'
+            })
+        @endif
+        @if (session()->has('error'))
+            Swal.fire({
+                title: 'Error',
+                text: '{{session('error')}}',
+                icon: 'error'
+            })
+        @endif
+    </script>
 </body>
+
 </html>
