@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
 </head>
 
-<body class="bg-light">
+<body class="bg-secondary-subtle">
 
 
     @include('layouts.header')
