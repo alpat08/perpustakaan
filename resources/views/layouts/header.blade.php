@@ -12,10 +12,19 @@
         </div>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+<<<<<<< HEAD
                 <li class="nav-item">
                     <a class="nav-link fs-5 {{ request()->is('Beranda') ? 'fw-bold text-primary' : 'text-dark' }}"
                         href="{{ route('dash') }}">Beranda</a>
                 </li>
+=======
+                @if (Auth::guest())
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 {{ request()->is('#') ? 'fw-bold text-primary' : 'text-dark' }}"
+                            href="{{route('public')}}">Beranda</a>
+                    </li>
+                @endif
+>>>>>>> main
                 @if (Auth::guest())
                     <li class="nav-item">
                         <a class="nav-link fs-5 {{ request()->is('login') ? 'fw-bold text-primary' : 'text-dark' }}"

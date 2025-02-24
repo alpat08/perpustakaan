@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PublicController;
@@ -19,10 +20,15 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/logins', [LoginController::class, 'login'])->name('logins');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:siswa'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dash');
 
+});
+Route::middleware(['auth', 'role:admin,guru'])->group(function() {
+
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+
+    Route::resource('/admins/user', UserController::class)->names('user');
 });
