@@ -7,7 +7,7 @@
         <div class="card shadow-sm">
             <div class="card-body">
                 <h1>Registrasi</h1>
-                <form action="{{ route('store') }}" method="post">
+                <form action="{{ route('registrasi.store') }}" method="post">
                     @csrf
                     <input type="text" name="name" placeholder="Ussername" class="mt-2 form-control @error('name') is-invalid @enderror">
                     @error('name')
