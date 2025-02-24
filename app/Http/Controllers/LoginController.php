@@ -10,4 +10,14 @@ class LoginController extends Controller
     {
         return view('login.index');
     }
+
+    public function store(Request $request)
+    {
+        try {
+
+            $data = 
+        } catch(\Exception $e) {
+
+        }
+    }
 }

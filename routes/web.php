@@ -10,4 +10,5 @@ Route::get('/', [PublicController::class, 'index'])->name('public');
 Route::middleware(['guest'])->group(function () {
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::get('/store', [LoginController::class, 'store'])->name('store');
 });

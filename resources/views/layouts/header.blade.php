@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-white">
+<nav class="navbar navbar-expand-sm navbar-light bg-white shadow-sm">
     <div class="container">
         <div class="d-flex justify-content-start gap-3">
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
