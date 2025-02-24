@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\StoreRegisterRequest;
 
 class LoginController extends Controller
 {
@@ -19,18 +20,10 @@ class LoginController extends Controller
         return view('register.index');
     }
 
-    public function store(Request $request)
+    public function store(StoreRegisterRequest $request)
     {
         try {
-            $request->validate([
-                'name' => 'required',
-                'email' => 'required',
-                'password' => 'required|min:8',
-            ],[
-                'name.required' => 'Nama wajib di isi',
-                'email.required' => 'Email wajib di isi',
-                'password.required' => 'Password wajib di isi',
-            ]);
+            $request->validated();
     
             User::create([
                 'name' => $request->name,
