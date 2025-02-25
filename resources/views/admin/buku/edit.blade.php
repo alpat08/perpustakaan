@@ -10,8 +10,7 @@
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Judul Buku</label>
-                <input type="text" class="form-control @error('buku') is-invalid @enderror" name="title"
-                    id="title" />
+                <input type="text" class="form-control @error('buku') is-invalid @enderror" name="title" id="title" />
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -21,8 +20,7 @@
 
             <div class="mb-3">
                 <label for="author" class="form-label">Penulis</label>
-                <input type="text" class="form-control @error('author') is-invalid @enderror" name="author"
-                    id="author" />
+                <input type="text" class="form-control @error('author') is-invalid @enderror" name="author" id="author" />
                 @error('author')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -32,7 +30,8 @@
 
             <div class="mb-3">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
-                <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi" rows="3"></textarea>
+                <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi"
+                    rows="3"></textarea>
                 @error('deskripsi')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -70,30 +69,21 @@
                 @else
                     <img class="img-preview img-fluid mb-3 col-sm-5">
                 @endif
-                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image"
-                    name="image" onchange="previewImage()">
+                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"
+                    onchange="previewImage()">
                 @error('image')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            <div class="mb-3">
-                <label for="Body" class="form-label">Dekskripsi</label>
-                <input id="body" type="hidden" name="deks" class="form-control @error('body') is-invalid @enderror"
-                    value="{{ old('body', $produk->deks) }}">
-                <trix-editor input="body"></trix-editor>
-                @error('body')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <button type="submit" class="btn btn-primary">Updated produk</button>
+
+            <a href="{{route('buku.index')}}" class="btn btn-secondary">Back</a>
+            <button type="submit" class="btn btn-success">Submit</button>
         </form>
     </div>
     <script>
-        document.addEventListener('trix-file-accept', function(e) {
+        document.addEventListener('trix-file-accept', function (e) {
             e.preventDefault();
         })
 
@@ -106,7 +96,7 @@
             const oFReader = new FileReader();
             oFReader.readAsDataURL(image.files[0]);
 
-            oFReader.onload = function(oFREvent) {
+            oFReader.onload = function (oFREvent) {
                 imgPreview.src = oFREvent.target.result;
             }
         }

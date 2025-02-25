@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BukuController extends Controller
 {
@@ -12,7 +14,8 @@ class BukuController extends Controller
      */
     public function index()
     {
-        return view('admin.buku.index');
+        $buku = Buku::orderBy('id')->get();
+        return view('admin.buku.index', compact('buku'));
     }
 
     /**
@@ -20,13 +23,15 @@ class BukuController extends Controller
      */
     public function create()
     {
-        return view('admin.buku.create');
+        $genre = Genre::orderBy('id')->get();
+        // dd($genre);
+        return view('admin.buku.create', compact('genre'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Buku $buku)
     {
         try {
             $data = $request->validate([
@@ -34,16 +39,21 @@ class BukuController extends Controller
                 'author' => 'required',
                 'deskripsi' => 'required',
                 'isi' => 'required|min:20',
-                'image' => 'required|image'
+                'image' => 'required|image',
+                'genre' => 'required|array',
+                'genre.*' => 'required'
             ]);
 
             if ($request->file('image')) {
                 $data['image'] = $request->file('image')->store('buku-images');
             }
-
-            Buku::create($data);
-            return redirect()->back()->with('success', 'Berhasil menambahkan buku');
+            
+            $buku = Buku::create($data);
+            // dd($buku, $data);
+            $buku->genres()->attach($request->genre);
+            return redirect()->route('buku.index')->with('success', 'Berhasil menambahkan buku');
         } catch(\Exception $e) {
+            dd($e);
             return redirect()->back()->with('error', 'Gagal menambahkan buku');
         }
     }
@@ -67,9 +77,30 @@ class BukuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Buku $buku)
     {
-        //
+        try {
+            $data = $request->validate([
+                'title' => 'required',
+                'author' => 'required',
+                'deskripsi' => 'required',
+                'isi' => 'required|min:20',
+                'image' => 'required|image'
+            ]);
+
+            if ($request->file('image')) {
+                if ($request->oldImage) {
+                    Storage::delete($request->oldImage);
+                }
+                
+                $data['image'] = $request->file('image')->store('buku-images');
+            }
+
+            $buku->update($data);
+            return redirect()->back()->with('success', 'Berhasil menambahkan buku');
+        } catch(\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menambahkan buku');
+        }
     }
 
     /**

@@ -9,9 +9,10 @@ class Buku extends Model
 {
     protected $table = "bukus";
 
-    public function genres() {
-        return $this->belongsToMany(Genre::class);
-    }
-
     protected $guarded = ['id'];
+    
+    public function genres() 
+    {
+        return $this->belongsToMany(Genre::class, 'genre_buku');
+    }
 }

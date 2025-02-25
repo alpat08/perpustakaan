@@ -15,6 +15,6 @@ class Genre extends Model
     protected $fillable = ['name'];
 
     public function bukus() {
-        return $this->belongsToMany(Buku::class);
+        return $this->belongsToMany(Buku::class, 'genre_buku');
     }
 }
