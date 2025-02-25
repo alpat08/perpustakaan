@@ -23,15 +23,23 @@
     @include('layouts.header')
 
 
-    <div class="container-fluid">
-        <div class="row">
-            @include('layouts.sidebar')
-
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                @yield('container')
-            </main>
+    @if (Auth::guest())
+        <div class="container py-4">
+            @yield('container')
         </div>
-    </div>
+    @endif
+
+    @if (Auth::check())
+        <div class="container-fluid">
+            <div class="row">
+                @include('layouts.sidebar')
+
+                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    @yield('container')
+                </main>
+            </div>
+        </div>
+    @endif
 
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
