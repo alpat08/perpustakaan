@@ -29,5 +29,22 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'role' => 'siswa'
         ]);
+
+        $genres = [
+            'Isekai',
+            'Romance',
+            'Slice Of Life',
+            'Horror',
+            'Action',
+            'Comedy',
+            'Fantasy',
+            'Adventure',
+            'School',
+            'Yuri',
+        ];
+
+        foreach($genres as $genre) {
+            Genre::create(['name' => $genre]);
+        }
     }
 }
