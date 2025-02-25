@@ -1,22 +1,47 @@
 @extends('layouts.main')
 
 @section('container')
-    <div class="d-flex gap-3 justify-content-center text-decoration-none">
-        <a href=""><div class="bg-primary bg-gradient text-center align-content-center my-3" style="width: 15rem;height: 10rem;">
-            <h4 class="text-light">Adventure</h4>
-        </div></a>
-        <a href=""><div class="bg-info text-center align-content-center my-3" style="width: 15rem;height: 10rem;">
-            <h4 class="text-light">Adventure</h4>
-        </div></a>
-        <a href=""><div class="bg-primary bg-gradient text-center align-content-center my-3" style="width: 15rem;height: 10rem;">
-            <h4 class="text-light">Adventure</h4>
-        </div></a>
-        <a href=""><div class="bg-info text-center align-content-center my-3" style="width: 15rem;height: 10rem;">
-            <h4 class="text-light">Adventure</h4>
-        </div></a>
-    </div>
-    <div class="card rounded-4 p-3 shadow">
-        <div class="card-body">
+<div class="card rounded-4 p-3 shadow">
+    <div class="card-body">
+        <div class="d-flex justify-content-between">
+            <div class="items">
+                <h1 class="fw-bold">The Book</h1>
+                <h4 class="mt-5"># A knowledgeable person will never feel satisfied because the more they know, the more they realize how little they understand</h4>
+                <h4 class="mt-5"># Knowledge is like water; it seeks low places. Those who are humble will always be filled with wisdom</h4>
+                <h4 class="mt-5"># Do not feel superior because of knowledge, for even the vast sky has limits, while knowledge does not</h4>
+            </div>
+            <div class="items">
+                <img class="" src="{{ asset('img/lovepik-stacked-books-png-image_401308409_wh1200-removebg-preview.png') }}" alt="">
+            </div>
+        </div>
+            <div class="d-flex gap-3 justify-content-center text-decoration-none">
+                <a href=""><div class="bg-primary bg-gradient text-center align-content-center my-2" style="width: 15rem;height: 10rem;">
+                    <h4 class="text-light">Fisika</h4>
+                </div></a>
+                <a href=""><div class="bg-info text-center align-content-center my-2" style="width: 15rem;height: 10rem;">
+                    <h4 class="text-light">Matematika</h4>
+                </div></a>
+                <a href=""><div class="bg-primary bg-gradient text-center align-content-center my-2" style="width: 15rem;height: 10rem;">
+                    <h4 class="text-light">IPS</h4>
+                </div></a>
+                <a href=""><div class="bg-info text-center align-content-center my-2" style="width: 15rem;height: 10rem;">
+                    <h4 class="text-light">Al-Islam</h4>
+                </div></a>
+            </div>
+            <div class="d-flex gap-3 justify-content-center text-decoration-none">
+                <a href=""><div class="bg-primary bg-gradient text-center align-content-center my-2" style="width: 15rem;height: 10rem;">
+                    <h4 class="text-light">Fikih</h4>
+                </div></a>
+                <a href=""><div class="bg-info text-center align-content-center my-2" style="width: 15rem;height: 10rem;">
+                    <h4 class="text-light">IPA</h4>
+                </div></a>
+                <a href=""><div class="bg-primary bg-gradient text-center align-content-center my-2" style="width: 15rem;height: 10rem;">
+                    <h4 class="text-light">PJOK</h4>
+                </div></a>
+                <a href=""><div class="bg-info text-center align-content-center my-2" style="width: 15rem;height: 10rem;">
+                    <h4 class="text-light">Qur'an Hadist</h4>
+                </div></a>
+            </div>
             <div class="row" style="width: 75rem">
                 <div class="col-4 my-4">
                     <div class="d-flex">
