@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use App\Models\Buku;
 use App\Models\Genre;
 use Illuminate\Http\Request;
@@ -64,9 +65,10 @@ class BukuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Buku $buku, Request $request)
     {
-        //
+        $genres = Genre::orderBy('id')->get();
+        return view('admin.buku.edit', compact('buku', 'genres'));
     }
 
     /**
@@ -84,12 +86,15 @@ class BukuController extends Controller
             ]);
 
             if ($request->file('image')) {
+
                 if ($request->oldImage) {
-                    Storage::delete($request->oldImage);
+                    Storage::disk('public')->delete($request->oldImage);
                 }
-                
+
                 $data['image'] = $request->file('image')->store('buku-images');
             }
+
+            // dd($request->oldImage, $data);
 
             $buku->update($data);
             return redirect()->route('buku.index')->with('success', 'Berhasil menambahkan buku');
@@ -101,8 +106,9 @@ class BukuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Buku $buku)
     {
-        //
+        $buku->delete();
+        return redirect()->back()->with('success', 'Berhasil menghapus buku');
     }
 }
