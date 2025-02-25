@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use App\Models\Buku;
 use App\Models\Genre;
 use Illuminate\Http\Request;
@@ -47,13 +48,13 @@ class BukuController extends Controller
             if ($request->file('image')) {
                 $data['image'] = $request->file('image')->store('buku-images');
             }
-            
+
             $buku = Buku::create($data);
             // dd($buku, $data);
             $buku->genres()->attach($request->genre);
             return redirect()->route('buku.index')->with('success', 'Berhasil menambahkan buku');
-        } catch(\Exception $e) {
-            dd($e);
+        } catch (\Exception $e) {
+            // dd($e);
             return redirect()->back()->with('error', 'Gagal menambahkan buku');
         }
     }
@@ -69,9 +70,10 @@ class BukuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Buku $buku, Request $request)
     {
-        //
+        $genres = Genre::orderBy('id')->get();
+        return view('admin.buku.edit', compact('buku', 'genres'));
     }
 
     /**
@@ -89,25 +91,31 @@ class BukuController extends Controller
             ]);
 
             if ($request->file('image')) {
+
                 if ($request->oldImage) {
-                    Storage::delete($request->oldImage);
+                    Storage::disk('public')->delete($request->oldImage);
                 }
-                
+
                 $data['image'] = $request->file('image')->store('buku-images');
             }
 
+            // dd($request->oldImage, $data);
+
             $buku->update($data);
-            return redirect()->back()->with('success', 'Berhasil menambahkan buku');
-        } catch(\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal menambahkan buku');
+            $buku->genres()->sync($request->genre);
+
+            return redirect()->route('buku.index')->with('success', 'Berhasil mengedit buku');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal mengedit buku');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Buku $buku)
     {
-        //
+        $buku->delete();
+        return redirect()->back()->with('success', 'Berhasil menghapus buku');
     }
 }
