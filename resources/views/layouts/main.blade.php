@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('bootstrap-icons/font/bootstrap-icons.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         a {
             text-decoration: none;
@@ -29,8 +30,10 @@
     <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('js/jquery.min.js')}}"></script>
     <script src="{{asset('js/sweetalert2.min.js')}}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
+        AOS.init();
         @if (session()->has('success'))
             Swal.fire({
                 title: 'Berhasil',
