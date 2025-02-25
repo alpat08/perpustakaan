@@ -37,12 +37,12 @@
                             <a class="nav-link fs-5 {{Request()->is('admin') ? 'text-primary fw-bold' : ''}}" href="{{route('admin')}}">Beranda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-5 {{Request()->is('user') ? 'text-primary fw-bold' : ''}}" href="{{route('user.index')}}">User</a>
+                            <a class="nav-link fs-5 {{Request()->is('admins/user') ? 'text-primary fw-bold' : ''}}" href="{{route('user.index')}}">User</a>
                         </li>
                         <li class="nav-item">
                             <form action="{{route('logout')}}" method="post">
                                 @csrf
-                                <button type="submit" class="nav-link fs-5"
+                                <button type="submit" class="nav-link fs-5 text-danger"
                                     onclick="return confirm('Tetap logout?')">Logout</button>
                             </form>
                         </li>

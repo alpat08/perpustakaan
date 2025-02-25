@@ -1,6 +1,20 @@
 @extends('layouts.main')
 
 @section('container')
+    <div class="d-flex gap-3 justify-content-center text-decoration-none">
+        <a href=""><div class="bg-primary bg-gradient text-center align-content-center my-3" style="width: 15rem;height: 10rem;">
+            <h4 class="text-light">Adventure</h4>
+        </div></a>
+        <a href=""><div class="bg-info text-center align-content-center my-3" style="width: 15rem;height: 10rem;">
+            <h4 class="text-light">Adventure</h4>
+        </div></a>
+        <a href=""><div class="bg-primary bg-gradient text-center align-content-center my-3" style="width: 15rem;height: 10rem;">
+            <h4 class="text-light">Adventure</h4>
+        </div></a>
+        <a href=""><div class="bg-info text-center align-content-center my-3" style="width: 15rem;height: 10rem;">
+            <h4 class="text-light">Adventure</h4>
+        </div></a>
+    </div>
     <div class="card rounded-4 p-3 shadow">
         <div class="card-body">
             <div class="row" style="width: 75rem">

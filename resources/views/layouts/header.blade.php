@@ -14,7 +14,7 @@
             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                 @if (Auth::guest())
                     <li class="nav-item">
-                        <a class="nav-link fs-5 {{ request()->is('#') ? 'fw-bold text-primary' : 'text-dark' }}"
+                        <a class="nav-link fs-5 {{ request()->is('/') ? 'fw-bold text-primary' : 'text-dark' }}"
                             href="{{route('public')}}">Beranda</a>
                     </li>
                 @endif
@@ -32,7 +32,7 @@
                     <li class="nav-item">
                         <form action="{{route('logout')}}" method="post">
                             @csrf
-                            <button type="submit" class="nav-link fs-5"
+                            <button type="submit" class="nav-link fs-5 text-danger"
                                 onclick="return confirm('Tetap logout?')">Logout</button>
                         </form>
                     </li>

@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('bootstrap-icons/font/bootstrap-icons.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body class="bg-secondary-subtle">
