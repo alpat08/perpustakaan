@@ -21,7 +21,7 @@
                     data-bs-target="#offcanvasNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="#">Dashboard</a>
+                <a class="navbar-brand" href="{{route('admin')}}">Dashboard</a>
             </div>
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" style="max-width: 250px;">
                 <div class="offcanvas-header">
@@ -34,10 +34,16 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link fs-5 {{Request()->is('admin') ? 'text-primary fw-bold' : ''}}" href="{{route('admin')}}">Beranda</a>
+                            <a class="nav-link fs-5 {{Request()->is('admin') ? 'text-primary fw-bold' : ''}}"
+                                href="{{route('admin')}}">Beranda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-5 {{Request()->is('admins/user') ? 'text-primary fw-bold' : ''}}" href="{{route('user.index')}}">User</a>
+                            <a class="nav-link fs-5 {{Request()->is('admins/user*') ? 'text-primary fw-bold' : ''}}"
+                                href="{{route('user.index')}}">User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 {{Request()->is('admins/buku*') ? 'text-primary fw-bold' : ''}}"
+                                href="{{route('buku.index')}}">Buku</a>
                         </li>
                         <li class="nav-item">
                             <form action="{{route('logout')}}" method="post">
