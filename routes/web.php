@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\DashboardController;
@@ -34,5 +35,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin');
         Route::resource('/admins/user', UserController::class)->names('user');
         Route::resource('/admins/buku', BukuController::class)->names('buku');
+        Route::resource('/admins/genre', GenreController::class)->names('genre');
     });
 });

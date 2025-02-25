@@ -46,6 +46,10 @@
                                 href="{{route('buku.index')}}">Buku</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link fs-5 {{Request()->is('admins/genre*') ? 'text-primary fw-bold' : ''}}"
+                                href="{{route('genre.index')}}">Genre</a>
+                        </li>
+                        <li class="nav-item">
                             <form action="{{route('logout')}}" method="post">
                                 @csrf
                                 <button type="submit" class="nav-link fs-5 text-danger"
