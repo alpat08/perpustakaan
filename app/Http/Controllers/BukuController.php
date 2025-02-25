@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreBukuRequest;
 use Illuminate\Support\Facades\Storage;
 
 class BukuController extends Controller
@@ -31,29 +32,22 @@ class BukuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Buku $buku)
+    public function store(StoreBukuRequest $request, Buku $buku)
     {
         try {
-            $data = $request->validate([
-                'title' => 'required',
-                'author' => 'required',
-                'deskripsi' => 'required',
-                'isi' => 'required|min:20',
-                'image' => 'required|image',
-                'genre' => 'required|array',
-                'genre.*' => 'required'
-            ]);
+            $data = $request->validated();
 
             if ($request->file('image')) {
                 $data['image'] = $request->file('image')->store('buku-images');
             }
             
+            // dd($data);
             $buku = Buku::create($data);
             // dd($buku, $data);
             $buku->genres()->attach($request->genre);
             return redirect()->route('buku.index')->with('success', 'Berhasil menambahkan buku');
         } catch(\Exception $e) {
-            dd($e);
+            // dd($e);
             return redirect()->back()->with('error', 'Gagal menambahkan buku');
         }
     }
@@ -61,9 +55,10 @@ class BukuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Buku $buku)
     {
-        //
+        $genre = Genre::orderBy('id')->get();
+        return view('admin.buku.show',compact('buku','genre'));
     }
 
     /**
@@ -97,7 +92,7 @@ class BukuController extends Controller
             }
 
             $buku->update($data);
-            return redirect()->back()->with('success', 'Berhasil menambahkan buku');
+            return redirect()->route('buku.index')->with('success', 'Berhasil menambahkan buku');
         } catch(\Exception $e) {
             return redirect()->back()->with('error', 'Gagal menambahkan buku');
         }
