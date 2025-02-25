@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BukuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
@@ -32,5 +33,6 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:admin,guru'])->group(function() {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin');
         Route::resource('/admins/user', UserController::class)->names('user');
+        Route::resource('/admins/buku', BukuController::class)->names('buku');
     });
 });
