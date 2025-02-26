@@ -14,6 +14,11 @@
         a {
             text-decoration: none;
         }
+
+        .sidebar {
+            height: 100vh;
+            top: 0;
+        }
     </style>
 </head>
 

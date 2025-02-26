@@ -24,14 +24,17 @@ Route::middleware(['guest'])->group(function () {
 // Route untuk pengguna yang sudah login (auth)
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-    
+
     // Route khusus siswa
     Route::middleware(['role:siswa'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('/dashboard/buku', [DashboardController::class, 'buku'])->name('dashbook');
+        Route::get('/dashboard/buku/{buku}', [DashboardController::class, 'show'])->name('show');
     });
 
     // Route khusus admin & guru
-    Route::middleware(['role:admin,guru'])->group(function() {
+    Route::middleware(['role:admin,guru'])->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin');
         Route::resource('/admins/user', UserController::class)->names('user');
         Route::resource('/admins/buku', BukuController::class)->names('buku');

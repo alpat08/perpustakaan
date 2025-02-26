@@ -7,38 +7,38 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" href="#">
-                <img src="{{asset('img/logo.png')}}" class="" style="max-width: 100px">
+                <img src="{{ asset('img/logo.png') }}" class="" style="max-width: 100px">
             </a>
         </div>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <div class="collapse navbar-collapse flex-column" id="collapsibleNavId">
             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                 @if (Auth::guest())
                     <li class="nav-item">
                         <a class="nav-link fs-5 {{ request()->is('/') ? 'fw-bold text-primary' : 'text-dark' }}"
-                            href="{{route('public')}}">Beranda</a>
+                            href="{{ route('public') }}">Beranda</a>
                     </li>
                 @endif
                 @if (Auth::guest())
                     <li class="nav-item">
                         <a class="nav-link fs-5 {{ request()->is('login') ? 'fw-bold text-primary' : 'text-dark' }}"
-                            href="{{route('login')}}">Login</a>
+                            href="{{ route('login') }}">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fs-5 {{ request()->is('registrasi') ? 'fw-bold text-primary' : 'text-dark' }}"
-                            href="{{route('registrasi.create')}}">Registrasi</a>
+                            href="{{ route('registrasi.create') }}">Registrasi</a>
                     </li>
                 @endif
                 @if (Auth::check())
+                    <div class="container mt-1">
+                        <h3 class="fw-bold">{{ auth()->user()->name }}</h3>
+                    </div>
                     <li class="nav-item">
-                        <form action="{{route('logout')}}" method="post">
+                        <form action="{{ route('logout') }}" method="post">
                             @csrf
                             <button type="submit" class="nav-link fs-5 text-danger"
                                 onclick="return confirm('Tetap logout?')">Logout</button>
                         </form>
                     </li>
-                    <div class="container mt-1">
-                        <h3 class="fw-bold">{{ auth()->user()->name }}</h3>
-                    </div>
                 @endif
             </ul>
         </div>
