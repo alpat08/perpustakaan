@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard/buku/{buku}', [DashboardController::class, 'show'])->name('show');
 
         Route::get('/dashboard/profile', [DashboardController::class, 'profile'])->name('profile');
+        Route::get('/dashboard/profile/edit', [DashboardController::class, 'edit'])->name('profile-edit');
+        Route::get('/dashboard/profile/update', [DashboardController::class, 'update'])->name('profile-update');
         Route::get('/dashboard/profile/password', [DashboardController::class, 'password'])->name('password');
         Route::post('/dashboard/profile/password-update', [DashboardController::class, 'update_password'])->name('update-password');
         Route::get('/dashboard/profile/verify', [DashboardController::class, 'verify'])->name('verify');

@@ -46,9 +46,9 @@
 
                         <!-- Tombol Aksi -->
                         <div class="mt-4">
-                            <button class="btn btn-primary px-4">
+                            <a href="{{ route('verify') }}" class="btn btn-primary px-4">
                                 <i class="bi bi-pencil fs-5 align-middle"></i> Edit Profil
-                            </button>
+                            </a>
                         </div>
 
                     </div>

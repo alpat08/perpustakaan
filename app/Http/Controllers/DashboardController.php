@@ -46,7 +46,7 @@ class DashboardController extends Controller
             'new_password' => 'required|min:8|confirmed'
         ]);
 
-        if(! Hash::check($request->current_password, Auth::user()->password)) {
+        if (! Hash::check($request->current_password, Auth::user()->password)) {
             return redirect()->back()->with('error', 'Password salah');
         }
 
@@ -56,6 +56,26 @@ class DashboardController extends Controller
         return redirect()->route('profile')->with('success', 'Berhasil mengubah password');
     }
 
+    public function edit()
+    {
+        return view('dashboard.profile.edit');
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
+        ]);
+
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        return redirect()->route('profile')->with('success', 'Akun berhasil diperbarui!');
+    }
+
     public function verify()
     {
         return view('dashboard.profile.verify');
@@ -63,8 +83,8 @@ class DashboardController extends Controller
 
     public function check(Request $request)
     {
-        if(Hash::check($request->password, Auth::user()->password)) {
-            return redirect()->route();
+        if (Hash::check($request->password, Auth::user()->password)) {
+            return redirect()->route('profile-edit');
         }
         return redirect()->back()->with('error', 'Password Salah');
     }
