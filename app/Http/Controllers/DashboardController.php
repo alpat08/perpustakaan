@@ -13,10 +13,10 @@ class DashboardController extends Controller
         return view('dashboard.index');
     }
 
-    public function buku()
+    public function buku(Request $request)
     {
-        $buku = Buku::orderBy('id')->get();
-        // $created = Carbon::parse($buku->created_at);
+        $buku = Buku::search(request(['search']))->orderBy("title")->simplePaginate(5);
+        // dd($request->all);
         return view('dashboard.buku.index', compact('buku'));
     }
 

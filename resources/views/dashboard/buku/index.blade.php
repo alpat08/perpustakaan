@@ -5,17 +5,19 @@
         <div class="card rounded-4 shadow-sm p-3">
             <div class="card-body">
                 <form class="d-flex gap-2 mb-3">
-                    <input class="ms-auto rounded-3 border-1" type="search" placeholder="Search" aria-label="Search" />
+                    <input class="ms-auto rounded-3 border-1" type="search" name="search" id="search" placeholder="Search"
+                        autocomplete="off" />
                     <button class="btn btn-outline-success" type="submit">
                         Search
                     </button>
+                    <a href="{{ route('dashbook') }}" class="btn btn-secondary">Clear</a>
                 </form>
 
 
                 <div class="row">
-                    @foreach ($buku as $item)
+                    @forelse ($buku as $item)
                         <div class="col-12 col-md-4 col-lg-3">
-                            <div class="card justify-content-center align-content-stretch pb-1">
+                            <div class="card my-3 justify-content-center align-content-stretch pb-1">
                                 <a href="{{ route('show', $item->id) }}">
                                     <img class="card-img-top" src="{{ asset('storage/' . $item->image) }}"
                                         style="background-size: cover;" />
@@ -29,7 +31,11 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="text-center">
+                            <h1 class="text-decoration-underline text-secondary">Produk Tidak ditemukan</h1>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>
