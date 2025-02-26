@@ -42,6 +42,13 @@ class DatabaseSeeder extends Seeder
             'Adventure',
             'School',
             'Yuri',
+            'Gore',
+            'Mystery',
+            'Mecha',
+            'Ecchi',
+            'Harem',
+            'Shounen',
+            'Supernatural',
         ];
 
         foreach($genres as $genre) {
