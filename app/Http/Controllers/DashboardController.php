@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Buku;
 use Carbon\Carbon;
+use App\Models\Buku;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
@@ -23,5 +26,46 @@ class DashboardController extends Controller
     public function show(Buku $buku)
     {
         return view('dashboard.buku.show', compact('buku'));
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('dashboard.profile.index', compact('user'));
+    }
+
+    public function password()
+    {
+        return view('dashboard.profile.password');
+    }
+
+    public function update_password(Request $request, User $user)
+    {
+        $data = $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed'
+        ]);
+
+        if(! Hash::check($request->current_password, Auth::user()->password)) {
+            return redirect()->back()->with('error', 'Password salah');
+        }
+
+        Auth::user()->update([
+            'password' => bcrypt($request->new_password)
+        ]);
+        return redirect()->route('profile')->with('success', 'Berhasil mengubah password');
+    }
+
+    public function verify()
+    {
+        return view('dashboard.profile.verify');
+    }
+
+    public function check(Request $request)
+    {
+        if(Hash::check($request->password, Auth::user()->password)) {
+            return redirect()->route();
+        }
+        return redirect()->back()->with('error', 'Password Salah');
     }
 }
