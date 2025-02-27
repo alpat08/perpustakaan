@@ -10,6 +10,11 @@ class Pinjam extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'tanggal_pinjam' => 'date',
+        'tanggal_kembali' => 'date',
+    ];
+
     public function isPending()
     {
         return $this->status === 'menunggu_persetujuan';

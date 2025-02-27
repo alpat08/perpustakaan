@@ -15,7 +15,7 @@ class PinjamController extends Controller
                 'buku_id' => 'required'
             ]);
 
-            if (Auth::user()->pinjam) {
+            if (Auth::user()->pinjam->status === 'menunggu_persutujuan' || Auth::user()->pinjam->status === 'dipinjam') {
                 return redirect()->back()->with('error', 'Anda sudah meminjam 1 buku');
             }
 
