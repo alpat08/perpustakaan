@@ -22,7 +22,11 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->buku->title }}</td>
                                     <td>{{ $item->tanggal_pinjam->translatedFormat('d F Y') }}</td>
-                                    <td>{{ $item->tanggal_kembali->translatedFormat('d F Y') }}</td>
+                                    @if ($item->tanggal_kembali === null)
+                                        <td class="fw-medium">Belum disetujui oleh guru</td>
+                                    @else
+                                        <td>{{ $item->tanggal_kembali->translatedFormat('d F Y') }}</td>
+                                    @endif
                                     <td>
                                         @if ($item->status === 'dipinjam')
                                             <span class="badge bg-primary">Dipinjam</span>
