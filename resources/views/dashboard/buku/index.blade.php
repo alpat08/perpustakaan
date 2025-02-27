@@ -17,10 +17,10 @@
                 <div class="row">
                     @forelse ($buku as $item)
                         <div class="col-12 col-md-4 col-lg-3">
-                            <div class="card my-3 justify-content-center align-content-stretch pb-1">
+                            <div class="card my-3 justify-content-center align-content-stretch pb-1 hover-card">
                                 <a href="{{ route('show', $item->id) }}">
                                     <img class="card-img-top" src="{{ asset('storage/' . $item->image) }}"
-                                        style="background-size: cover;" />
+                                        style="background-size: cover; height: 180px;" />
                                 </a>
                                 <div class="card-body">
                                     <small class="text-secondary">{{ $item->author }}</small>
@@ -33,7 +33,7 @@
                         </div>
                     @empty
                         <div class="text-center">
-                            <h1 class="text-decoration-underline text-secondary">Produk Tidak ditemukan</h1>
+                            <h1 class="text-decoration-underline text-secondary">Buku Tidak Ditemukan.</h1>
                         </div>
                     @endforelse
                 </div>

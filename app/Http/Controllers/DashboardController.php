@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Buku;
 use App\Models\User;
+use App\Models\Pinjam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,13 +19,14 @@ class DashboardController extends Controller
 
     public function buku(Request $request)
     {
-        $buku = Buku::search(request(['search']))->orderBy("title")->simplePaginate(5);
+        $buku = Buku::search(request(['search']))->orderBy("id")->simplePaginate(5);
         // dd($request->all);
         return view('dashboard.buku.index', compact('buku'));
     }
 
     public function show(Buku $buku)
     {
+        // dd($buku);
         return view('dashboard.buku.show', compact('buku'));
     }
 
@@ -49,8 +51,8 @@ class DashboardController extends Controller
         if (! Hash::check($request->current_password, Auth::user()->password)) {
             return redirect()->back()->with('error', 'Password salah');
         }
-
-        Auth::user()->update([
+        $user = Auth::user();
+        $user->update([
             'password' => bcrypt($request->new_password)
         ]);
         return redirect()->route('profile')->with('success', 'Berhasil mengubah password');
@@ -69,7 +71,7 @@ class DashboardController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
         ]);
 
-        if($request->file('image')) {
+        if ($request->file('image')) {
             $data['image'] = $request->file('image')->store('profile-images');
             $image = $data['image'];
         }
@@ -95,5 +97,41 @@ class DashboardController extends Controller
             return redirect()->route('profile-edit');
         }
         return redirect()->back()->with('error', 'Password Salah');
+    }
+
+    public function pinjaman()
+    {
+        $buku = Pinjam::where('user_id', Auth::id())
+            ->where('status', 'dipinjam')
+            ->first();
+        // dd($buku);
+        return view('dashboard.buku.pinjaman', compact('buku'));
+    }
+
+    public function riwayat()
+    {
+        $peminjaman = Pinjam::where('user_id', Auth::id())->get();
+        return view('dashboard.buku.riwayat', compact('peminjaman'));
+    }
+
+    public function kembali(Request $request, Pinjam $pinjam)
+    {
+        try {
+
+            $request->validate([
+                'id' => 'required'
+            ]);
+
+            $pinjam = Pinjam::find($request->id);
+
+            // dd($pinjam);
+            
+            $pinjam->update([
+                'status' => 'dikembalikan'
+            ]);
+            return redirect()->back()->with('success', 'Buku Berhasil dikembalikan');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }
