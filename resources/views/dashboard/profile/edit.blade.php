@@ -9,14 +9,6 @@
                         <h4 class="fw-bold text-center">Edit Profil</h4>
                         <p class="text-muted text-center">Perbarui informasi akun Anda</p>
 
-                        <!-- Flash Message -->
-                        @if (session('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                {{ session('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        @endif
-
                         <!-- Form Edit Profile -->
                         <form action="{{ route('profile-update') }}" method="POST">
                             @csrf
