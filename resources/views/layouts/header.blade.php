@@ -29,8 +29,9 @@
                     </li>
                 @endif
                 @if (Auth::check())
-                    <div class="container mt-1">
-                        <h3 class="fw-bold">{{ auth()->user()->name }}</h3>
+                    <div class="container mt-1 d-flex gap-3">
+                        <h3 class="fw-bold align-content-center">{{ auth()->user()->name }}</h3>
+                        <a class="text-decoration-none" href="{{ route('profile') }}"><img class="rounded-circle shadow-sm border" width="45" height="45" alt="User Avatar" src="{{ asset('storage/'. auth()->user()->image) }}" alt=""></a>
                     </div>
                 @endif
             </ul>
