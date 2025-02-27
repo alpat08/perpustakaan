@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function pinjam()
     {
-        return $this->hasMany(Pinjam::class);
+        return $this->hasOne(Pinjam::class);
     }
 
     public function sedangMeminjam()

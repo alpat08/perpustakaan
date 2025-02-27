@@ -26,13 +26,14 @@
                 </p>
             </div>
         </div>
-        <form action="{{ route('pinjam') }}" method="post">
-            @csrf
+        {{-- @if (!Auth::user()->pinjam) --}}
+            <form action="{{ route('pinjam') }}" method="post">
+                @csrf
 
-            <input type="hidden" name="buku_id" value="{{ $buku->id }}">
-            <button type="submit" class="btn btn-success float-end"
-                {{ Auth::user()->sedangMeminjam() ? 'disabled' : '' }}>Pinjam Buku</button>
-        </form>
+                <input type="hidden" name="buku_id" value="{{ $buku->id }}">
+                <button type="submit" class="btn btn-success float-end">Pinjam Buku</button>
+            </form>
+        {{-- @endif --}}
         {{-- <div class="row justify-content-center mt-4">
             <h5 class="border-top pt-3 text-center fw-normal">{{ $buku->isi }}</h5>
         </div> --}}

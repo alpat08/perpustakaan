@@ -69,7 +69,7 @@ class DashboardController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
         ]);
 
-        if($request->file('image')) {
+        if ($request->file('image')) {
             $data['image'] = $request->file('image')->store('profile-images');
             $image = $data['image'];
         }
@@ -95,5 +95,10 @@ class DashboardController extends Controller
             return redirect()->route('profile-edit');
         }
         return redirect()->back()->with('error', 'Password Salah');
+    }
+
+    public function pinjaman()
+    {
+        return view('dashboard.buku.pinjaman');
     }
 }

@@ -15,6 +15,10 @@ class PinjamController extends Controller
                 'buku_id' => 'required'
             ]);
 
+            if (Auth::user()->pinjam) {
+                return redirect()->back()->with('error', 'Anda sudah meminjam 1 buku');
+            }
+
             Pinjam::create([
                 'user_id' => Auth::id(),
                 'buku_id' => $request->buku_id,

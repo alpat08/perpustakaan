@@ -19,6 +19,15 @@
             height: 100vh;
             top: 0;
         }
+
+        .hover-card {
+            transition: transform 0.8s ease, box-shadow 0.5s ease;
+        }
+
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.15)
+        }
     </style>
 </head>
 
