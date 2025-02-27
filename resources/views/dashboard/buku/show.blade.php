@@ -27,15 +27,18 @@
             </div>
         </div>
         {{-- @if (!Auth::user()->pinjam) --}}
-            <form action="{{ route('pinjam') }}" method="post">
-                @csrf
+        <form action="{{ route('pinjam') }}" method="post">
+            @csrf
 
-                <input type="hidden" name="buku_id" value="{{ $buku->id }}">
-                <button type="submit" class="btn btn-success float-end">Pinjam Buku</button>
-            </form>
+            <input type="hidden" name="buku_id" value="{{ $buku->id }}">
+            <button type="submit" class="btn btn-success float-end">Pinjam Buku</button>
+        </form>
         {{-- @endif --}}
-        {{-- <div class="row justify-content-center mt-4">
-            <h5 class="border-top pt-3 text-center fw-normal">{{ $buku->isi }}</h5>
-        </div> --}}
+        
+        @if (Auth::user()->pinjam->status === 'dipinjam')
+            <div class="row justify-content-center mt-4">
+                <h5 class="border-top pt-3 text-center fw-normal">{{ $buku->isi }}</h5>
+            </div>
+        @endif
     </div>
 @endsection

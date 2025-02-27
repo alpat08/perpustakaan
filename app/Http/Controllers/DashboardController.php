@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Buku;
 use App\Models\User;
+use App\Models\Pinjam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +19,7 @@ class DashboardController extends Controller
 
     public function buku(Request $request)
     {
-        $buku = Buku::search(request(['search']))->orderBy("title")->simplePaginate(5);
+        $buku = Buku::search(request(['search']))->orderBy("id")->simplePaginate(5);
         // dd($request->all);
         return view('dashboard.buku.index', compact('buku'));
     }
@@ -99,6 +100,10 @@ class DashboardController extends Controller
 
     public function pinjaman()
     {
-        return view('dashboard.buku.pinjaman');
+        $buku = Pinjam::where('user_id', Auth::id())
+        ->where('status', 'dipinjam')
+        ->first();
+        // dd($buku);
+        return view('dashboard.buku.pinjaman', compact('buku'));
     }
 }
