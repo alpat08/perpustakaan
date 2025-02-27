@@ -45,6 +45,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/dashboard/buku/pinjam/update', [PinjamController::class, 'update'])->name('pinjam-update');
         
         Route::get('/dashboard/pinjaman-buku', [DashboardController::class, 'pinjaman'])->name('siswa-pinjam');
+        
+        Route::post('/dashboard/pinjaman-buku/kembali', [DashboardController::class, 'kembali'])->name('kembali');
+
+        Route::get('/dashboard/riwayat', [DashboardController::class, 'riwayat'])->name('riwayat');
     });
 
     // Route khusus admin & guru

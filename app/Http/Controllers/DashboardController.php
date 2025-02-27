@@ -26,6 +26,7 @@ class DashboardController extends Controller
 
     public function show(Buku $buku)
     {
+        // dd($buku);
         return view('dashboard.buku.show', compact('buku'));
     }
 
@@ -50,8 +51,8 @@ class DashboardController extends Controller
         if (! Hash::check($request->current_password, Auth::user()->password)) {
             return redirect()->back()->with('error', 'Password salah');
         }
-
-        Auth::user()->update([
+        $user = Auth::user();
+        $user->update([
             'password' => bcrypt($request->new_password)
         ]);
         return redirect()->route('profile')->with('success', 'Berhasil mengubah password');
@@ -101,9 +102,36 @@ class DashboardController extends Controller
     public function pinjaman()
     {
         $buku = Pinjam::where('user_id', Auth::id())
-        ->where('status', 'dipinjam')
-        ->first();
+            ->where('status', 'dipinjam')
+            ->first();
         // dd($buku);
         return view('dashboard.buku.pinjaman', compact('buku'));
+    }
+
+    public function riwayat()
+    {
+        $peminjaman = Pinjam::where('user_id', Auth::id())->get();
+        return view('dashboard.buku.riwayat', compact('peminjaman'));
+    }
+
+    public function kembali(Request $request, Pinjam $pinjam)
+    {
+        try {
+
+            $request->validate([
+                'id' => 'required'
+            ]);
+
+            $pinjam = Pinjam::find($request->id);
+
+            // dd($pinjam);
+            
+            $pinjam->update([
+                'status' => 'dikembalikan'
+            ]);
+            return redirect()->back()->with('success', 'Buku Berhasil dikembalikan');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

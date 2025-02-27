@@ -12,7 +12,7 @@
             <li class="nav-item"><a class="nav-link text-light" href="{{route('siswa-pinjam')}}"><i class="bi bi-book"></i> Buku
                     Pinjaman</a>
             </li>
-            <li class="nav-item"><a class="nav-link text-light" href="#"><i class="bi bi-clock-history"></i>
+            <li class="nav-item"><a class="nav-link text-light" href="{{route('riwayat')}}"><i class="bi bi-clock-history"></i>
                     Riwayat Peminjaman</a></li>
             <li class="nav-item"><a class="nav-link text-light" href="{{route('profile')}}"><i class="bi bi-gear"></i> Pengaturan</a>
             </li>
