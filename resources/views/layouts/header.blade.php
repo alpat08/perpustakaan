@@ -32,7 +32,7 @@
                     <div class="container mt-1 d-flex gap-3">
                         <h3 class="fw-bold align-content-center">{{ auth()->user()->name }}</h3>
                         <a class="text-decoration-none" href="{{ route('profile') }}">
-                            <img src="{{ $user->image ? asset('storage/' . $user->image) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=0D6EFD&color=fff&size=150&length=1' }}"
+                            <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=0D6EFD&color=fff&size=150&length=1' }}"
                                 class="rounded-circle shadow-sm border" width="45" height="45" alt="User Avatar">
                         </a>
                     </div>
