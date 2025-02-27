@@ -25,4 +25,9 @@ class Buku extends Model
     {
         return $this->belongsToMany(Genre::class, 'genre_buku');
     }
+
+    public function pinjam()
+    {
+        return $this->hasOne(Pinjam::class);
+    }
 }

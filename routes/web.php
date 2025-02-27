@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PinjamController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\DashboardController;
 
@@ -26,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     // Route khusus siswa
-    Route::middleware(['role:siswa'])->group(function () {
+    Route::middleware(['role:siswa,guru'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('/dashboard/buku', [DashboardController::class, 'buku'])->name('dashbook');
@@ -39,11 +40,17 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/dashboard/profile/password-update', [DashboardController::class, 'update_password'])->name('update-password');
         Route::get('/dashboard/profile/verify', [DashboardController::class, 'verify'])->name('verify');
         Route::post('/dashboard/profile/check-password', [DashboardController::class, 'check'])->name('check-password');
+
+        Route::post('/dashboard/buku/pinjam', [PinjamController::class, 'store'])->name('pinjam');
+        Route::post('/dashboard/buku/pinjam/update', [PinjamController::class, 'update'])->name('pinjam-update');
     });
 
     // Route khusus admin & guru
     Route::middleware(['role:admin,guru'])->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+
+        Route::get('/admin/peminjaman', [AdminController::class, 'peminjaman'])->name('peminjaman');
+        
         Route::resource('/admins/user', UserController::class)->names('user');
         Route::resource('/admins/buku', BukuController::class)->names('buku');
         Route::resource('/admins/genre', GenreController::class)->names('genre');

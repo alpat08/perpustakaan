@@ -46,4 +46,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function pinjam()
+    {
+        return $this->hasMany(Pinjam::class);
+    }
+
+    public function sedangMeminjam()
+    {
+        return $this->pinjam()->whereIn('status', ['menunggu_persetujuan', 'disetujui', 'dipinjam'])->exists();
+    }
 }
