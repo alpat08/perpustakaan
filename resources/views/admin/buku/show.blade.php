@@ -20,7 +20,17 @@
             </div>
         </div>
         <div class="row justify-content-center mt-4">
-            <h5 class="border-top pt-3 text-center">{{ $buku->isi }}</h5>
+            <table class="table">
+                <tr>
+                    @foreach ($buku->chapters as $item)
+                        <th>Chapter : {{ $item->id }}</th>
+                        <th>{{ $item->name }}</th>
+                    @endforeach
+                    <th>
+                        <a class="btn btn-info btn-sm" href="{{ route('chapter', [$buku->title,$buku->id]) }}"><i class="bi bi-eye"></i></a>
+                    </th>
+                </tr>
+            </table>
         </div>
     </div>
 @endsection

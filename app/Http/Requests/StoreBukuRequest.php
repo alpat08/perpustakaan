@@ -28,7 +28,8 @@ class StoreBukuRequest extends FormRequest
                 'isi' => 'required|min:20',
                 'image' => 'required|image',
                 'genre' => 'required|array',
-                'genre.*' => 'required'
+                'genre.*' => 'required',
+                'chapter' => 'required',
         ];
     }
 
@@ -40,6 +41,7 @@ class StoreBukuRequest extends FormRequest
                 'isi.required' => 'Isian wajib di isi',
                 'image.required' => 'Image wajib di isi',
                 'genre.required' => 'Genre wajib di pilih',
+                'chapter.required' => 'Judul chapter wajib di isi',
         ];
     }
 }
