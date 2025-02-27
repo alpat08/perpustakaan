@@ -3,7 +3,7 @@
         <h4 class="fw-bold">Perpustakaan</h4>
         <hr class="border-light w-75">
         <ul class="nav flex-column w-100">
-            <li class="nav-item"><a class="nav-link text-light" href="#"><i class="bi bi-house-door"></i>
+            <li class="nav-item"><a class="nav-link text-light" href="{{ route('dashboard') }}"><i class="bi bi-house-door"></i>
                     Dashboard</a>
             </li>
             <li class="nav-item"><a class="nav-link text-light" href="{{ route('dashbook') }}"><i

@@ -63,7 +63,6 @@
                 </div>
 
                 <div class="mb-3">
-                    {{-- @dd($buku->image) --}}
                     <label for="image" class="form-label">Gambar</label>
                     <input type="hidden" name="oldImage" value="{{ $buku->image }}">
                     @if ($buku->image)

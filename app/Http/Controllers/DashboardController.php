@@ -65,13 +65,21 @@ class DashboardController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'image' => 'required|image',
             'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
         ]);
+
+        if($request->file('image')) {
+            $data['image'] = $request->file('image')->store('profile-images');
+            $image = $data['image'];
+        }
 
         $user = Auth::user();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->image = $image;
         $user->save();
+        // dd($user);
 
         return redirect()->route('profile')->with('success', 'Akun berhasil diperbarui!');
     }
