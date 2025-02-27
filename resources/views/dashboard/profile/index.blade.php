@@ -9,7 +9,7 @@
 
                         <!-- Avatar -->
                         <div class="mb-3">
-                            <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=0D6EFD&color=fff&size=150&length=1"
+                            <img src="{{ $user->image ? asset('storage/'. $user->image) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=0D6EFD&color=fff&size=150&length=1' }}"
                                 class="rounded-circle shadow-sm border" width="120" height="120" alt="User Avatar">
                         </div>
 
