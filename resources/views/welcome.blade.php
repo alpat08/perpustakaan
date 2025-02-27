@@ -26,25 +26,24 @@
     </div>
 </div>
 
-<!-- Motivational Blog Section -->
 <div class="container text-center my-5">
     <div class="row">
-        <div class="col-md-6 mb-3" data-aos="zoom-in">
-            <blockquote class="blockquote text-muted">
+        <div class="col-md-6 mb-3">
+            <blockquote class="blockquote text-muted" data-aos="zoom-in">
                 <h4 class="fw-bold mb-3">Nelson Mandela</h4>
                 "Pendidikan adalah senjata paling ampuh yang dapat Anda gunakan untuk mengubah dunia."
             </blockquote>
-            <blockquote class="blockquote text-muted">
+            <blockquote class="blockquote text-muted" data-aos="zoom-in">
                 <h4 class="fw-bold mb-3">John Wooden</h4>
                 "Jangan biarkan apa yang tidak bisa Anda lakukan mengganggu apa yang bisa Anda lakukan."
             </blockquote>
         </div>
-        <div class="col-md-6 mb-3" data-aos="zoom-in">
+        <div class="col-md-6 mb-3" data-aos="zoom-in" data-aos="zoom-in">
             <blockquote class="blockquote text-muted">
                 <h4 class="fw-bold mb-3">Winston Churchill</h4>
                 "Kesuksesan bukanlah akhir, kegagalan bukanlah fatal: yang terpenting adalah keberanian untuk terus melangkah."
             </blockquote>
-            <blockquote class="blockquote text-muted">
+            <blockquote class="blockquote text-muted" data-aos="zoom-in">
                 <h4 class="fw-bold mb-3">Anonim</h4>
                 "Lakukan sesuatu hari ini yang akan membuat diri Anda di masa depan berterima kasih."
             </blockquote>
@@ -60,7 +59,7 @@
         <a href="https://www.facebook.com" data-aos="zoom-in" class="btn btn-primary me-2"><i class="bi bi-facebook"></i> Facebook</a>
         <a href="https://www.instagram.com" data-aos="zoom-in" class="btn btn-danger me-2"><i class="bi bi-instagram"></i> Instagram</a>
         <a href="https://www.twitter.com" data-aos="zoom-in" class="btn btn-info me-2"><i class="bi bi-twitter"></i> Twitter</a>
-        <a href="https://wa.me/1234567890" data-aos="zoom-in" class="btn btn-success"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+        <a href="https://wa.me/123456789" data-aos="zoom-in" class="btn btn-success"><i class="bi bi-whatsapp"></i> WhatsApp</a>
     </div>
 </div>
 
