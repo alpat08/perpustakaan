@@ -51,7 +51,12 @@
 
                 <div class="mb-3">
                     <label for="chapter" class="form-label">Judul Chapter</label>
-                    <input type="text" name="chapter" class="form-control" id="chapter">
+                    <input type="text" name="chapter" class="form-control @error('chapter') is-invalid @enderror" id="chapter" value="{{old('chapter')}}">
+                    @error('chapter')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
                 </div>
 
                 {{-- <div class="mb-3">

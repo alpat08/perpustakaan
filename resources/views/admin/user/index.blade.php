@@ -13,6 +13,7 @@
                             <th>No</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Peran</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -22,6 +23,7 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->email}}</td>
+                                <td>{{$item->role}}</td>
                                 <td>
                                     <a href="{{route('user.edit', $item->id)}}" class="btn btn-sm btn-warning"><i
                                             class="bi bi-pencil-square"></i></a>
