@@ -1,24 +1,32 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-white shadow-sm sticky-top">
-    <div class="container">
-        <div class="d-flex justify-content-start gap-3">
-            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container d-flex align-items-center justify-content-between">
+        <button class="navbar-toggler border-0 d-md-none" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#sidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="d-flex justify-content-between w-100 align-items-center">
             <a class="navbar-brand" href="#">
-                <img src="{{ asset('img/logo.png') }}" class="" style="max-width: 100px">
+                <img src="{{ asset('img/logo.png') }}" style="max-width: 100px">
             </a>
+
+            @if (Auth::check())
+                <div class="d-lg-none d-flex align-items-center gap-2">
+                    <h5 class="fw-bold mb-0">{{ auth()->user()->name }}</h5>
+                    <a href="{{ route('profile') }}">
+                        <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=0D6EFD&color=fff&size=150&length=1' }}"
+                            class="rounded-circle shadow-sm border" width="40" height="40" alt="User Avatar">
+                    </a>
+                </div>
+            @endif
         </div>
-        <div class="collapse navbar-collapse flex-column" id="collapsibleNavId">
-            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
                 @if (Auth::guest())
                     <li class="nav-item">
                         <a class="nav-link fs-5 {{ request()->is('/') ? 'fw-bold text-primary' : 'text-dark' }}"
                             href="{{ route('public') }}">Beranda</a>
                     </li>
-                @endif
-                @if (Auth::guest())
                     <li class="nav-item">
                         <a class="nav-link fs-5 {{ request()->is('login') ? 'fw-bold text-primary' : 'text-dark' }}"
                             href="{{ route('login') }}">Login</a>
@@ -28,14 +36,15 @@
                             href="{{ route('registrasi.create') }}">Registrasi</a>
                     </li>
                 @endif
+
                 @if (Auth::check())
-                    <div class="container mt-1 d-flex gap-3">
-                        <h3 class="fw-bold align-content-center">{{ auth()->user()->name }}</h3>
-                        <a class="text-decoration-none" href="{{ route('profile') }}">
+                    <li class="nav-item d-none d-lg-flex align-items-center gap-2">
+                        <h5 class="fw-bold mb-0">{{ auth()->user()->name }}</h5>
+                        <a href="{{ route('profile') }}">
                             <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=0D6EFD&color=fff&size=150&length=1' }}"
-                                class="rounded-circle shadow-sm border" width="45" height="45" alt="User Avatar">
+                                class="rounded-circle shadow-sm border" width="40" height="40" alt="User Avatar">
                         </a>
-                    </div>
+                    </li>
                 @endif
             </ul>
         </div>
