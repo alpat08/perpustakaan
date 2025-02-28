@@ -14,7 +14,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard.index');
+        $pinjam = Pinjam::where('user_id', Auth::id())->with('buku')->get();
+        // dd($pinjam);
+        return view('dashboard.index', compact('pinjam'));
     }
 
     public function buku(Request $request)
