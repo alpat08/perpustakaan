@@ -5,29 +5,37 @@
         <hr class="border-light">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link text-light" href="{{ route('dashboard') }}">
+                <a class="nav-link {{ request()->is('dashboard') ? 'text-primary fw-bold' : 'text-light' }}"
+                    href="{{ route('dashboard') }}">
                     <i class="bi bi-house-door"></i> Beranda
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" href="{{ route('dashbook') }}">
+                <a class="nav-link {{ request()->is('dashboard/buku*') ? 'text-primary fw-bold' : 'text-light' }}" href="{{ route('dashbook') }}">
                     <i class="bi bi-search"></i> Cari Buku
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" href="{{ route('siswa-pinjam') }}">
+                <a class="nav-link {{ request()->is('dashboard/pinjaman-buku*') ? 'text-primary fw-bold' : 'text-light' }}" href="{{ route('siswa-pinjam') }}">
                     <i class="bi bi-book"></i> Buku Pinjaman
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" href="{{ route('riwayat') }}">
+                <a class="nav-link {{ request()->is('dashboard/riwayat*') ? 'text-primary fw-bold' : 'text-light' }}" href="{{ route('riwayat') }}">
                     <i class="bi bi-clock-history"></i> Riwayat
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" href="{{ route('profile') }}">
+                <a class="nav-link {{ request()->is('dashboard/profile*') ? 'text-primary fw-bold' : 'text-light' }}" href="{{ route('profile') }}">
                     <i class="bi bi-gear"></i> Pengaturan
                 </a>
+            </li>
+            <li class="nav-item">
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit" class="nav-link fs-5 text-danger"
+                        onclick="return confirm('Tetap logout?')"><i class="bi bi-door-open"></i> Logout</button>
+                </form>
             </li>
         </ul>
     </div>
@@ -65,6 +73,13 @@
                 <a class="nav-link text-light" href="{{ route('profile') }}">
                     <i class="bi bi-gear"></i> Pengaturan
                 </a>
+            </li>
+            <li class="nav-item">
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit" class="nav-link text-danger" onclick="return confirm('Tetap logout?')"><i
+                            class="bi bi-door-open"></i> Logout</button>
+                </form>
             </li>
         </ul>
     </div>
