@@ -3,7 +3,9 @@
 @section('container')
     <div class="container mt-4">
         <div class="row justify-content-center mt-4">
-            <h5>{{ $buku->isi }}</h5>
+            @foreach ($buku->ceritas as $item)
+                <h5>{{ $item->isi }}</h5>                
+            @endforeach
         </div>
     </div>
 @endsection

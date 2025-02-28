@@ -22,8 +22,8 @@
         <div class="row justify-content-center mt-4">
             <table class="table">
                 <tr>
-                    @foreach ($buku->chapters as $item)
-                        <th>Chapter : {{ $item->id }}</th>
+                    @foreach ($buku->chapters as $no=>$item)
+                        <th>Chapter : {{ $no+1 }}</th>
                         <th>{{ $item->name }}</th>
                     @endforeach
                     <th>

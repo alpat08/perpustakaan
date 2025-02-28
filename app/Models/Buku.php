@@ -34,4 +34,8 @@ class Buku extends Model
     public function chapters() {
         return $this->belongsToMany(Chapter::class, 'chapter_buku');
     }
+
+    public function ceritas() {
+        return $this->belongsToMany(Cerita::class,'cerita_buku');
+    }
 }
