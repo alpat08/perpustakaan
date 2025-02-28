@@ -37,6 +37,13 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'role' => 'guru'
         ]);
+        User::factory()->create([
+            'name' => 'alpat',
+            'email' => 'alpat@gmail.com',
+            'password' => bcrypt('password'),
+            'email_verified_at' => now(),
+            'role' => 'guru'
+        ]);
 
         $genres = [
             'Isekai',

@@ -4,7 +4,10 @@
 
     <div class="card rounded-4 shadow-sm p-3">
         <div class="card-body">
-            <h4 class="card-title mb-3">Edit Buku</h4>
+            <div class="d-flex justify-content-between">
+                <h4 class="card-title mb-3">Edit Buku</h4>
+                <a href="{{ route('view_chapter', $buku->id) }}" class="btn btn-warning btn-sm">Lihat chapter</a>
+            </div>
             <form method="POST" action="{{route('buku.update', $buku->id)}}" enctype="multipart/form-data">
                 @method('put')
                 @csrf

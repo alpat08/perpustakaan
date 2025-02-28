@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Log;
 use App\Models\Buku;
 use App\Models\Genre;
+use App\Models\Chapter;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreBukuRequest;
 use Illuminate\Support\Facades\Storage;
@@ -40,15 +41,28 @@ class BukuController extends Controller
 
             if ($request->file('image')) {
                 $data['image'] = $request->file('image')->store('buku-images');
+                $image = $data['image'];
             }
             
-            // dd($data);
-            $buku = Buku::create($data);
+            $chapter = Chapter::create([
+                'name' => $request->chapter,
+            ]);
+
+
+            // dd($chapter);
+            $buku = Buku::create([
+                'title' => $request->title,
+                'author' => $request->author,
+                'deskripsi' => $request->deskripsi,
+                'isi' => $request->isi,
+                'image' => $image,
+            ]);
             // dd($buku, $data);
             $buku->genres()->attach($request->genre);
+            $buku->chapters()->attach($chapter->id);
             return redirect()->route('buku.index')->with('success', 'Berhasil menambahkan buku');
         } catch(\Exception $e) {
-            // dd($e);
+            dd($e);
             return redirect()->back()->with('error', 'Gagal menambahkan buku');
         }
     }
@@ -58,8 +72,9 @@ class BukuController extends Controller
      */
     public function show(Buku $buku)
     {
+        $chapter = Chapter::orderBy('id')->get();
         $genre = Genre::orderBy('id')->get();
-        return view('admin.buku.show',compact('buku','genre'));
+        return view('admin.buku.show',compact('buku','genre','chapter'));
     }
 
     /**
@@ -110,5 +125,19 @@ class BukuController extends Controller
     {
         $buku->delete();
         return redirect()->back()->with('success', 'Berhasil menghapus buku');
+    }
+
+    public function chapter($title, $id) {
+        $buku = Buku::find($id);
+        return view('admin.buku.chapter',compact('buku'));
+    }
+
+    public function view_chapter(Buku $buku) {
+        $chapter = Chapter::orderBy('id')->get();
+        return view('admin.buku.view_chapter', compact('buku','chapter'));
+    }
+
+    public function create_chapter() {
+        return view('admin.buku.create_chapter');
     }
 }

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
 </head>
 
-<body class="bg-light">
+<body class="bg-secondary-subtle">
 
 
     <nav class="navbar navbar-light bg-white shadow-sm sticky-top">

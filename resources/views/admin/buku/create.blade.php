@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="card rounded-4 shadow-sm p-3">
-        <div class="card-body">
+        <div class="card-body bg-secondary bg-opacity-10 rounded-3">
             <h4 class="card-title">Tambah Buku</h4>
             <form action="{{ route('buku.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
@@ -47,6 +47,11 @@
                             {{ $message }}
                         </div>
                     @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="chapter" class="form-label">Judul Chapter</label>
+                    <input type="text" name="chapter" class="form-control" id="chapter">
                 </div>
 
                 {{-- <div class="mb-3">

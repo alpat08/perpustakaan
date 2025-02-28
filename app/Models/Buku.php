@@ -30,4 +30,8 @@ class Buku extends Model
     {
         return $this->hasOne(Pinjam::class);
     }
+
+    public function chapters() {
+        return $this->belongsToMany(Chapter::class, 'chapter_buku');
+    }
 }
