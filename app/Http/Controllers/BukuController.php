@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Log;
 use App\Models\Buku;
 use App\Models\Genre;
+use App\Models\Cerita;
 use App\Models\Chapter;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreBukuRequest;
@@ -48,18 +49,21 @@ class BukuController extends Controller
                 'name' => $request->chapter,
             ]);
 
+            $cerita = Cerita::create([
+                'isi' => $request->isi,
+            ]);
 
             // dd($chapter);
             $buku = Buku::create([
                 'title' => $request->title,
                 'author' => $request->author,
                 'deskripsi' => $request->deskripsi,
-                'isi' => $request->isi,
                 'image' => $image,
             ]);
             // dd($buku, $data);
             $buku->genres()->attach($request->genre);
             $buku->chapters()->attach($chapter->id);
+            $buku->ceritas()->attach($cerita->id);
             return redirect()->route('buku.index')->with('success', 'Berhasil menambahkan buku');
         } catch(\Exception $e) {
             dd($e);
@@ -83,22 +87,30 @@ class BukuController extends Controller
     public function edit(Buku $buku, Request $request)
     {
         $genres = Genre::orderBy('id')->get();
-        return view('admin.buku.edit', compact('buku', 'genres'));
+        $cerita = Cerita::orderBy('id')->get();
+        return view('admin.buku.edit', compact('buku', 'genres','cerita'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Buku $buku)
+    public function update(Request $request,Buku $buku,Cerita $cerita)
     {
         try {
-            $data = $request->validate([
+            $request->validate([
                 'title' => 'required',
                 'author' => 'required',
                 'deskripsi' => 'required',
                 'isi' => 'required|min:20',
-                'image' => 'required|image'
+                'image' => 'nullable|image'
             ]);
+
+            $data = [
+                'title' => $request->title,
+                'author' => $request->author,
+                'deskripsi' => $request->deskripsi,
+            ];
+
 
             if ($request->file('image')) {
 
@@ -109,11 +121,20 @@ class BukuController extends Controller
                 $data['image'] = $request->file('image')->store('buku-images');
             }
 
+            $cerita = [
+                'isi' => $request->isi,
+            ];
+
+            foreach($buku->ceritas as $item){
+                $item->update($cerita);
+            }
+
             // dd($request->oldImage, $data);
 
             $buku->update($data);
             return redirect()->route('buku.index')->with('success', 'Berhasil menambahkan buku');
         } catch(\Exception $e) {
+            // dd($e);
             return redirect()->back()->with('error', 'Gagal menambahkan buku');
         }
     }
@@ -122,22 +143,27 @@ class BukuController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Buku $buku)
-    {
+    {   
+        if ($buku->image) {
+            Storage::disk('public')->delete($buku->image);
+        }
+        $buku->chapters()->detach();
+        foreach($buku->chapters as $chapter) {
+            $chapter->delete(); //Call to a member function delete() on false 
+        }
+
+        $buku->ceritas()->detach();
+        foreach($buku->ceritas as $cerita) {
+            $cerita->delete();
+        }
         $buku->delete();
         return redirect()->back()->with('success', 'Berhasil menghapus buku');
     }
 
     public function chapter($title, $id) {
         $buku = Buku::find($id);
-        return view('admin.buku.chapter',compact('buku'));
+        $cerita = Cerita::orderBy('id')->get();
+        return view('admin.buku.chapter',compact('buku','cerita'));
     }
 
-    public function view_chapter(Buku $buku) {
-        $chapter = Chapter::orderBy('id')->get();
-        return view('admin.buku.view_chapter', compact('buku','chapter'));
-    }
-
-    public function create_chapter() {
-        return view('admin.buku.create_chapter');
-    }
 }

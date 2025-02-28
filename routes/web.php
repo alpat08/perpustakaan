@@ -8,6 +8,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PinjamController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\DashboardController;
 
 // Route untuk halaman utama (bisa diakses siapa saja)
@@ -58,8 +59,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/peminjaman', [AdminController::class, 'peminjaman'])->name('peminjaman');
 
         Route::get('/admins/buku/{title}/chapter/{id}',[BukuController::class,'chapter'])->name('chapter');
-        Route::get('/admins/buku/chapter/{buku}',[BukuController::class,'view_chapter'])->name('view_chapter');
-        Route::get('/admins/buku/create/chapter',[BukuController::class,'create_chapter'])->name('create_chapter');
+        Route::get('/admins/chapter/buku/{buku}', [ChapterController::class, 'index'])->name('chapters.index');
+        Route::resource('/admins/buku/chapter',ChapterController::class)->except('index')->names('chapters');
         Route::resource('/admins/user', UserController::class)->names('user');
         Route::resource('/admins/buku', BukuController::class)->names('buku');
         Route::resource('/admins/genre', GenreController::class)->names('genre');

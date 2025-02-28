@@ -6,7 +6,8 @@
         <div class="card-body">
             <div class="d-flex justify-content-between">
                 <h4 class="card-title mb-3">Edit Buku</h4>
-                <a href="{{ route('view_chapter', $buku->id) }}" class="btn btn-warning btn-sm">Lihat chapter</a>
+                <a href="{{ route('chapters.index', $buku) }}" class="btn btn-warning btn-sm">Lihat chapter</a>
+                {{-- @dd($buku) --}}
             </div>
             <form method="POST" action="{{route('buku.update', $buku->id)}}" enctype="multipart/form-data">
                 @method('put')
@@ -46,8 +47,10 @@
 
                 <div class="mb-3">
                     <label for="isi" class="form-label">Isi Buku</label>
+                    @foreach ($buku->ceritas as $item)
                     <textarea class="form-control @error('isi') is-invalid @enderror" name="isi" id="isi"
-                        rows="3">{{ $buku->isi }}</textarea>
+                        rows="3">{{ $item->isi }}</textarea>
+                    @endforeach
                     @error('isi')
                         <div class="invalid-feedback">
                             {{ $message }}
