@@ -59,7 +59,7 @@ class LoginController extends Controller
                 return redirect()->route('dashboard')->with('success', 'Berhasil login');
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Login gagal');
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 

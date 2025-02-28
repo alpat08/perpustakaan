@@ -6,30 +6,31 @@
 
         <!-- Card Info -->
         <div class="row my-4">
-            <div class="col-md-4">
-                <div class="card bg-primary text-white shadow-lg">
+            <div class="col-12 col-md-6">
+                <div class="card bg-primary text-white shadow-lg" style="height: 160px">
                     <div class="card-body">
                         <h5 class="card-title"> Buku Dipinjam</h5>
-                        <p class="card-text fs-4 fw-bold">3 Buku</p>
-                        <p>Sedang dipinjam saat ini</p>
+                        @if ($pinjam?->isEmpty())
+                            <p class="card-text fs-6 fw-bold">Belum meminjam buku</p>
+                            <p>Sedang dipinjam saat ini</p>
+                        @else
+                            <p class="card-text fs-4 fw-bold">{{ $pinjam->buku->title }}</p>
+                            <p>Sedang dipinjam saat ini</p>
+                        @endif
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card bg-warning text-dark shadow-lg">
+            <div class="col-12 col-md-6">
+                <div class="card bg-warning text-dark shadow-lg" style="height: 160px">
                     <div class="card-body">
                         <h5 class="card-title"> Batas Pengembalian</h5>
-                        <p class="card-text fs-4 fw-bold">2 Hari Lagi</p>
-                        <p>Jangan sampai telat ya!</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card bg-success text-white shadow-lg">
-                    <div class="card-body">
-                        <h5 class="card-title"> Buku Populer</h5>
-                        <p class="card-text fs-4 fw-bold">"Harry Potter"</p>
-                        <p>J.K. Rowling</p>
+                        @if ($pinjam?->isEmpty())
+                            <p class="card-text fs-4 fw-bold">-</p>
+                            <p>Jangan sampai telat ya!</p>
+                        @else
+                            <p class="card-text fs-4 fw-bold">{{ $pinjam->tanggal_kembali->diffForhumans() }}</p>
+                            <p>Jangan sampai telat ya!</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -46,26 +47,21 @@
                         <th>Tanggal Peminjaman</th>
                         <th>Batas Pengembalian</th>
                         <th>Status</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Matematika Dasar</td>
-                        <td>Ahmad Dahlan</td>
-                        <td>20 Feb 2025</td>
-                        <td>27 Feb 2025</td>
-                        <td><span class="badge bg-success">Aman</span></td>
-                        <td><a href="#" class="btn btn-sm btn-warning"> Perpanjang</a></td>
-                    </tr>
-                    <tr>
-                        <td>Sejarah Indonesia</td>
-                        <td>Sri Hartono</td>
-                        <td>18 Feb 2025</td>
-                        <td>25 Feb 2025</td>
-                        <td><span class="badge bg-danger">Tersisa 1 Hari</span></td>
-                        <td><a href="#" class="btn btn-sm btn-warning"> Perpanjang</a></td>
-                    </tr>
+                    @forelse ($pinjam as $item)
+                        <tr>
+                            <td>{{ $item->title }}</td>
+                            <td>{{ $item->tanggal_pinjam }}</td>
+                            <td>{{ $item->tanggal_kembali }}</td>
+                            <td>{{ $item->status }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">Belum ada riwayat peminjaman</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
