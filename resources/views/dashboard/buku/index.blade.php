@@ -4,13 +4,15 @@
     <div class="container py-4">
         <div class="card rounded-4 shadow-sm p-3">
             <div class="card-body">
-                <form class="d-flex gap-2 mb-3">
-                    <input class="ms-auto rounded-3 border-1" type="search" name="search" id="search" placeholder="Search"
-                        autocomplete="off" />
-                    <button class="btn btn-outline-success" type="submit">
-                        Search
-                    </button>
-                    <a href="{{ route('dashbook') }}" class="btn btn-secondary">Clear</a>
+                <form class="row gap-2 mb-3">
+                    <div class="col-12 col-md-12">
+                        <input class="ms-auto rounded-3 border-1 p-2" type="search" name="search" id="search"
+                            placeholder="Search" autocomplete="off" />
+                        <button class="btn btn-outline-success my-2" type="submit">
+                            Search
+                        </button>
+                        <a href="{{ route('dashbook') }}" class="btn btn-secondary">Clear</a>
+                    </div>
                 </form>
 
 

@@ -14,9 +14,7 @@
                             <div class="card-body">
                                 {{-- @dd($item->genres) --}}
                                 <h4 class="card-title">Judul: {{ $item->title }}</h4>
-                                <h4 class="card-subtitle fs-6 d-inline">
-                                    Genre: {{ $item->genres->take(3)->pluck('name')->implode(', ') }}
-                                </h4>
+                                
                                 <p class="card-text">Deskripsi: <br> {{ Str::limit($item->deskripsi, '50') }}</p>
                                 <a href="{{ route('buku.show', $item->id) }}" class="btn btn-sm btn-info my-1"><i
                                         class="bi bi-eye"></i> Lihat</a>
