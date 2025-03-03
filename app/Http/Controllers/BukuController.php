@@ -156,28 +156,43 @@ class BukuController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Buku $buku)
-    {   
-        if ($buku->image) {
-            Storage::disk('public')->delete($buku->image);
-        }
-
-        $buku->chapters()->detach();
-        foreach($buku->chapters as $chapter) {
-            dd($chapter);
-            $chapter->delete(); 
-        }
-
-        $ceritas = $buku->chapters->flatMap(function($item) {
-            return $item->ceritas;
-        });
+    {    
+        try {
+            if ($buku->image) {
+                Storage::disk('public')->delete($buku->image);
+            }
+    
+            $chapters = $buku->chapters;
+    
+            foreach ($chapters as $chapter) {
+                // Ambil semua cerita sebelum detach
+                $ceritas = $chapter->ceritas;
+    
+                // Hapus hubungan pivot chapter-cerita
+                $chapter->ceritas()->detach();
+    
+                // Hapus semua cerita yang terkait
+                foreach ($ceritas as $cerita) {
+                    $cerita->delete();
+                }
         
-        foreach($ceritas as $item) {
-            $item->delete();
+                // Hapus chapter setelah semua cerita dihapus
+                $chapter->delete();
+            }
+    
+            // Hapus hubungan pivot buku-chapter
+            $buku->chapters()->detach();
+    
+            // Hapus buku
+            $buku->delete();
+    
+            return redirect()->back()->with('success', 'Berhasil menghapus buku beserta semua chapter dan cerita terkait.');
+        } catch (\Exception $e) {
+            dd($e);
+            return redirect()->back()->with('gagal', 'Gagal menghapus buku beserta semua chapter dan cerita terkait.');
         }
-
-        $buku->delete();
-        return redirect()->back()->with('success', 'Berhasil menghapus buku');
-}
+    }
+    
 
     public function chapter(Cerita $cerita) {
 
