@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Models\Cerita;
 use App\Models\Chapter;
 use Illuminate\Http\Request;
 
@@ -20,19 +21,27 @@ class ChapterController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        return view('admin.buku.create_chapter');
+    public function create(Buku $buku)
+    {   
+        return view('admin.buku.create_chapter',compact('buku'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Chapter $chapter,Request $request)
+    public function store(Buku $buku,Cerita $cerita,Chapter $chapter,Request $request)
     {
-        // $chapter->create([
-        //     'name' => $request->chapter,
-        // ]);
+        $cerita = Cerita::create([
+            'isi' => $request->isi,
+        ]);
+        $buku->ceritas()->attach($cerita->id);
+        
+        $chapter = Chapter::create([
+            'name' => $request->chapter,
+        ]);
+        $buku->chapters()->attach($chapter->id);
+
+        return redirect()->route('chapters.index',compact('buku'))->with('success','Chapter berhasil di tambahkan');
     }
 
     /**

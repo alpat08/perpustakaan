@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Genre;
+use App\Models\Cerita;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -35,7 +36,4 @@ class Buku extends Model
         return $this->belongsToMany(Chapter::class, 'chapter_buku');
     }
 
-    public function ceritas() {
-        return $this->belongsToMany(Cerita::class,'cerita_buku');
-    }
 }

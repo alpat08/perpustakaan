@@ -35,7 +35,7 @@ class BukuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBukuRequest $request, Buku $buku)
+    public function store(StoreBukuRequest $request, Buku $buku,Chapter $chapter)
     {
         try {
             $data = $request->validated();
@@ -63,10 +63,10 @@ class BukuController extends Controller
             // dd($buku, $data);
             $buku->genres()->attach($request->genre);
             $buku->chapters()->attach($chapter->id);
-            $buku->ceritas()->attach($cerita->id);
+            $chapter->ceritas()->attach($cerita->id);
             return redirect()->route('buku.index')->with('success', 'Berhasil menambahkan buku');
         } catch(\Exception $e) {
-            dd($e);
+            // dd($e);
             return redirect()->back()->with('error', 'Gagal menambahkan buku');
         }
     }
@@ -86,17 +86,35 @@ class BukuController extends Controller
      */
     public function edit(Buku $buku, Request $request)
     {
+        
+        $ceritas = $buku->chapters->flatMap(function($item) {
+            return $item->ceritas;
+        });
+        
         $genres = Genre::orderBy('id')->get();
-        $cerita = Cerita::orderBy('id')->get();
-        return view('admin.buku.edit', compact('buku', 'genres','cerita'));
+        $chapter = Chapter::orderBy('id')->get();
+
+        return view('admin.buku.edit', compact('buku', 'genres','chapter','ceritas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,Buku $buku,Cerita $cerita)
+    public function update(Request $request,Buku $buku,Chapter $chapter)
     {
         try {
+
+            $ceritas = $buku->chapters->flatMap(function($item) {
+                return $item->ceritas;
+            });
+            
+            foreach($ceritas as $item) {
+                $item->update([
+                    'isi' => $request->isi,
+                ]);
+
+            }
+
             $request->validate([
                 'title' => 'required',
                 'author' => 'required',
@@ -121,13 +139,8 @@ class BukuController extends Controller
                 $data['image'] = $request->file('image')->store('buku-images');
             }
 
-            $cerita = [
-                'isi' => $request->isi,
-            ];
-
-            foreach($buku->ceritas as $item){
-                $item->update($cerita);
-            }
+            $buku->update($data);
+            
 
             // dd($request->oldImage, $data);
 
@@ -147,23 +160,28 @@ class BukuController extends Controller
         if ($buku->image) {
             Storage::disk('public')->delete($buku->image);
         }
+
         $buku->chapters()->detach();
         foreach($buku->chapters as $chapter) {
-            $chapter->delete(); //Call to a member function delete() on false 
+            dd($chapter);
+            $chapter->delete(); 
         }
 
-        $buku->ceritas()->detach();
-        foreach($buku->ceritas as $cerita) {
-            $cerita->delete();
+        $ceritas = $buku->chapters->flatMap(function($item) {
+            return $item->ceritas;
+        });
+        
+        foreach($ceritas as $item) {
+            $item->delete();
         }
+
         $buku->delete();
         return redirect()->back()->with('success', 'Berhasil menghapus buku');
-    }
+}
 
-    public function chapter($title, $id) {
-        $buku = Buku::find($id);
-        $cerita = Cerita::orderBy('id')->get();
-        return view('admin.buku.chapter',compact('buku','cerita'));
+    public function chapter(Cerita $cerita) {
+
+        return view('admin.buku.chapter',compact('cerita'));
     }
 
 }

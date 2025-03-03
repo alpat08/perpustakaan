@@ -17,4 +17,8 @@ class Chapter extends Model
     public function bukus() {
         return $this->belongsToMany(Buku::class, 'chapter_buku');
     }
+
+    public function ceritas() {
+        return $this->belongsToMany(Cerita::class,'cerita_chapter');
+    }
 }

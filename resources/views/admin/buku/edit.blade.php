@@ -47,7 +47,7 @@
 
                 <div class="mb-3">
                     <label for="isi" class="form-label">Isi Buku</label>
-                    @foreach ($buku->ceritas as $item)
+                    @foreach ($ceritas as $item)
                     <textarea class="form-control @error('isi') is-invalid @enderror" name="isi" id="isi"
                         rows="3">{{ $item->isi }}</textarea>
                     @endforeach
