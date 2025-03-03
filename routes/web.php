@@ -58,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/admin/peminjaman', [AdminController::class, 'peminjaman'])->name('peminjaman');
 
-        Route::get('/admins/buku/name/{title}/{name}',[BukuController::class,'chapter'])->name('chapter');
+        Route::get('/admins/buku/name/{cerita}',[BukuController::class,'chapter'])->name('chapter');
         Route::get('/admins/chapter/buku/{buku}', [ChapterController::class, 'index'])->name('chapters.index');
         Route::get('/admins/chapter/create/{buku}', [ChapterController::class, 'create'])->name('chapters.create');
         Route::post('/admins/chapter/store/{buku}', [ChapterController::class, 'store'])->name('chapters.store');

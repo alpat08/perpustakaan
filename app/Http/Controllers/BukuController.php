@@ -195,7 +195,6 @@ class BukuController extends Controller
     
 
     public function chapter(Cerita $cerita) {
-
         return view('admin.buku.chapter',compact('cerita'));
     }
 

@@ -20,17 +20,22 @@
             </div>
         </div>
         <div class="row justify-content-center mt-4">
-            @foreach ($buku->chapters as $no=>$item)
-            <table class="table text-start">
-                <tr>
-                        <th>Chapter : {{ $no+1 }}</th>
+            @foreach ($buku->chapters as $no => $item)
+                <table class="table text-start">
+                    <tr>
+                        <th>Chapter : {{ $no + 1 }}</th>
                         <th>{{ $item->name }}</th>
                         <th>
-                            <a class="btn btn-info btn-sm" href="{{ route('chapter', [$buku->title,$item->name] ) }}"><i class="bi bi-eye"></i></a>
+                            {{-- @dd($item->ceritas) --}}
+                            @foreach ($item->ceritas as $cerita)
+
+                                <a class="btn btn-info btn-sm" href="{{ route('chapter', $cerita->id) }}"><i
+                                        class="bi bi-eye"></i></a>
+                            @endforeach
                         </th>
                     </tr>
                 </table>
-                @endforeach
+            @endforeach
         </div>
     </div>
 @endsection
