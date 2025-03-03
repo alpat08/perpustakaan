@@ -104,22 +104,21 @@ class BukuController extends Controller
     {
         try {
 
-            $ceritas = $buku->chapters->flatMap(function($item) {
-                return $item->ceritas;
-            });
+            // $ceritas = $buku->chapters->flatMap(function($item) {
+            //     return $item->ceritas;
+            // });
             
-            foreach($ceritas as $item) {
-                $item->update([
-                    'isi' => $request->isi,
-                ]);
+            // foreach($ceritas as $item) {
+            //     $item->update([
+            //         'isi' => $request->isi,
+            //     ]);
 
-            }
+            // }
 
             $request->validate([
                 'title' => 'required',
                 'author' => 'required',
                 'deskripsi' => 'required',
-                'isi' => 'required|min:20',
                 'image' => 'nullable|image'
             ]);
 
@@ -143,12 +142,13 @@ class BukuController extends Controller
             
 
             // dd($request->oldImage, $data);
+            // dd(route('buku.index'));
 
             $buku->update($data);
-            return redirect()->route('buku.index')->with('success', 'Berhasil menambahkan buku');
+            return redirect()->route('buku.index')->with('success','Berhasil di  update');
         } catch(\Exception $e) {
             // dd($e);
-            return redirect()->back()->with('error', 'Gagal menambahkan buku');
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 

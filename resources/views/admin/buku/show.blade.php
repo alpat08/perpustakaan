@@ -20,22 +20,29 @@
             </div>
         </div>
         <div class="row justify-content-center mt-4">
-            @foreach ($buku->chapters as $no => $item)
-                <table class="table text-start">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped table-bordered">
                     <tr>
-                        <th>Chapter : {{ $no + 1 }}</th>
-                        <th>{{ $item->name }}</th>
-                        <th>
-                            {{-- @dd($item->ceritas) --}}
-                            @foreach ($item->ceritas as $cerita)
-
-                                <a class="btn btn-info btn-sm" href="{{ route('chapter', $cerita->id) }}"><i
-                                        class="bi bi-eye"></i></a>
-                            @endforeach
-                        </th>
+                        <th>Chapter</th>
+                        <th>Nama</th>
+                        <th>Tindakan</th>
                     </tr>
+                    @foreach ($buku->chapters as $no => $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>
+                                {{-- @dd($item->ceritas) --}}
+                                @foreach ($item->ceritas as $cerita)
+
+                                    <a class="btn btn-info btn-sm" href="{{ route('chapter', $cerita->id) }}"><i
+                                            class="bi bi-eye"></i></a>
+                                @endforeach
+                            </td>
+                        </tr>
+                    @endforeach
                 </table>
-            @endforeach
+            </div>
         </div>
     </div>
 @endsection

@@ -60,10 +60,16 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/admins/buku/name/{cerita}',[BukuController::class,'chapter'])->name('chapter');
         Route::get('/admins/chapter/buku/{buku}', [ChapterController::class, 'index'])->name('chapters.index');
+        
+        Route::get('/admins/{chapter}/show', [ChapterController::class, 'view_chapter'])->name('view_chapter');
+        
+        Route::get('/admins/{chapter}/edit', [ChapterController::class, 'edit_chapter'])->name('edit_chapter');
+        Route::post('/admins/{chapter}/update', [ChapterController::class, 'update_chapter'])->name('update_chapter');
         Route::get('/admins/chapter/create/{buku}', [ChapterController::class, 'create'])->name('chapters.create');
         Route::post('/admins/chapter/store/{buku}', [ChapterController::class, 'store'])->name('chapters.store');
         Route::resource('/admins/buku/chapter',ChapterController::class)->except('index','create','store')->names('chapters');
         Route::resource('/admins/user', UserController::class)->names('user');
+        // Route::get('/admins/bukus', [BukuController::class,'index'])->name('buku.index');
         Route::resource('/admins/buku', BukuController::class)->names('buku');
         Route::resource('/admins/genre', GenreController::class)->names('genre');
     });

@@ -46,19 +46,6 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="isi" class="form-label">Isi Buku</label>
-                    @foreach ($ceritas as $item)
-                    <textarea class="form-control @error('isi') is-invalid @enderror" name="isi" id="isi"
-                        rows="3">{{ $item->isi }}</textarea>
-                    @endforeach
-                    @error('isi')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
                     @foreach ($genres as $genre)
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="genre_{{ $genre->id }}" name="genre[]"
