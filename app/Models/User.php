@@ -49,7 +49,14 @@ class User extends Authenticatable
 
     public function pinjam()
     {
-        return $this->hasOne(Pinjam::class);
+        return $this->hasOne(Pinjam::class, 'user_id');
+    }
+
+    public function pinjamAktif()
+    {
+        return $this->hasOne(Pinjam::class)
+            ->where('status', 'dipinjam')
+            ->latest();
     }
 
     public function sedangMeminjam()

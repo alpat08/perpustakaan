@@ -15,9 +15,17 @@ class PinjamController extends Controller
                 'buku_id' => 'required'
             ]);
 
-            if (Auth::user()->pinjam->status === 'menunggu_persutujuan' || Auth::user()->pinjam->status === 'dipinjam') {
+            if (Auth::user()->banned_until && now()->lessThan(Auth::user()->banned_until)) {
+                return redirect()->back()->with('error', 'Anda tidak bisa meminjam hingga ' . Auth::user()->banned_until->translatedFormat('d F Y'));
+            }
+
+            $userPinjaman = Auth::user()->pinjam()->whereIn('status', ['menunggu_persetujuan', 'dipinjam'])->exists();
+
+            // dd($userPinjaman);
+            if ($userPinjaman) {
                 return redirect()->back()->with('error', 'Anda sudah meminjam 1 buku');
             }
+
 
             Pinjam::create([
                 'user_id' => Auth::id(),

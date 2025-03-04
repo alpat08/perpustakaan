@@ -11,8 +11,8 @@ class Pinjam extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'tanggal_pinjam' => 'date',
-        'tanggal_kembali' => 'date',
+        'tanggal_pinjam' => 'datetime',
+        'tanggal_kembali' => 'datetime',
     ];
 
     public function isPending()

@@ -6,7 +6,8 @@
             <div class="card-body">
                 <h2 class="text-center card-title mb-4">Buku yang Sedang Dipinjam</h2>
                 <div class="row justify-content-center">
-                    @if (Auth::user()->pinjam && Auth::user()->pinjam->status === 'dipinjam')
+                    {{-- @dd(Auth::user()->pinjamAktif) --}}
+                    @if (Auth::user()->pinjamAktif)
                         <div class="col-md-4">
                             <div class="card hover-card shadow-sm">
                                 <a href="{{ route('show', $buku->buku_id) }}">

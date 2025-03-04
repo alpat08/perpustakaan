@@ -6,7 +6,9 @@ use Carbon\Carbon;
 use App\Models\Buku;
 use App\Models\User;
 use App\Models\Pinjam;
+use App\Models\Chapter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,9 +16,26 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $pinjam = Pinjam::where('user_id', Auth::id())->with('buku')->get();
+        $pinjam = Pinjam::where('user_id', Auth::id())->with('buku')->first();
+        $pinjams = Pinjam::where('user_id', Auth::id())->with('buku')->get();
         // dd($pinjam);
-        return view('dashboard.index', compact('pinjam'));
+        $pinjamss = Auth::user()->pinjam()->where('status', 'dipinjam')->latest()->first();
+        if (!$pinjam || !$pinjam->tanggal_kembali) {
+            $pesan = "Belum ada peminjaman aktif";
+        } else {
+            $daysLeft = round(now()->diffInDays($pinjamss->tanggal_kembali, false));
+
+            if ($daysLeft > 0) {
+                $pesan = "$daysLeft hari lagi";
+            } elseif ($daysLeft == 0) {
+                $pesan = "Hari terakhir pengembalian!";
+            } else {
+                $pesan = "Terlambat " . abs($daysLeft) . " hari!";
+            }
+        }
+        // dd($daysLeft);
+
+        return view('dashboard.index', compact('pinjam', 'pinjams', 'pesan'));
     }
 
     public function buku(Request $request)
@@ -28,8 +47,12 @@ class DashboardController extends Controller
 
     public function show(Buku $buku)
     {
-        // dd($buku);
-        return view('dashboard.buku.show', compact('buku'));
+        $chapter = $buku->chapters->flatMap(function ($item) {
+            return $item->ceritas->pluck('isi');
+        });
+        $userPinjaman = Auth::user()->pinjam()->whereIn('status', ['menunggu_persetujuan', 'dipinjam'])->exists();
+        // dd($chapter);
+        return view('dashboard.buku.show', compact('buku', 'chapter', 'userPinjaman'));
     }
 
     public function profile()
@@ -125,12 +148,26 @@ class DashboardController extends Controller
             ]);
 
             $pinjam = Pinjam::find($request->id);
+            $tanggal_kembali = $pinjam->tanggal_kembali;
+            $hari_terlambat = now()->diffInDays($tanggal_kembali, false);
 
+            // Jika terlambat
+            if ($hari_terlambat < 0) {
+                $banned_days = abs($hari_terlambat) * 2; // Dihukum 2x lipat jumlah hari keterlambatan
+                Auth::user()->banned_until = now()->addDays($banned_days);
+                Auth::user()->save();
+            }
             // dd($pinjam);
-            
-            $pinjam->update([
-                'status' => 'dikembalikan'
-            ]);
+
+            if ($hari_terlambat >= 0) {
+                $pinjam->update([
+                    'status' => 'dikembalikan'
+                ]);
+            } else {
+                $pinjam->update([
+                    'status' => 'terlambat'
+                ]);
+            }
             return redirect()->back()->with('success', 'Buku Berhasil dikembalikan');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

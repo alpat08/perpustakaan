@@ -7,29 +7,31 @@
 
                 <div class="row my-4">
                     <div class="col-12 col-md-6 my-3">
-                        <div class="card bg-primary text-white shadow-lg" style="height: 160px">
-                            <div class="card-body">
-                                <h5 class="card-title"> Buku Dipinjam</h5>
-                                @if ($pinjam?->isEmpty())
-                                    <p class="card-text fs-6 fw-bold">Belum meminjam buku</p>
-                                    <p>Sedang dipinjam saat ini</p>
-                                @else
-                                    <p class="card-text fs-4 fw-bold">{{ $pinjam->buku->title }}</p>
-                                    <p>Sedang dipinjam saat ini</p>
-                                @endif
+                        <a href="{{ route('siswa-pinjam') }}">
+                            <div class="card bg-primary text-white shadow-lg" style="height: 160px">
+                                <div class="card-body">
+                                    <h5 class="card-title"> Buku Dipinjam</h5>
+                                    {{-- @dd($pinjam) --}}
+                                    @if (Auth::user()->pinjamAktif)
+                                        <p class="card-text fs-4 fw-bold">{{ $pinjam->buku->title }}</p>
+                                        <p>Sedang dipinjam saat ini</p>
+                                    @else
+                                        <p class="card-text fs-6 fw-bold">Belum meminjam buku</p>
+                                        <p>Sedang dipinjam saat ini</p>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-12 col-md-6 my-3">
                         <div class="card bg-warning text-dark shadow-lg" style="height: 160px">
                             <div class="card-body">
                                 <h5 class="card-title"> Batas Pengembalian</h5>
-                                @if ($pinjam?->isEmpty())
-                                    <p class="card-text fs-4 fw-bold">-</p>
+                                @if (Auth::user()->pinjamAktif)
+                                    <p class="card-text fs-4 fw-bold">{{ $pesan }}</p>
                                     <p>Jangan sampai telat ya!</p>
                                 @else
-                                    <p class="card-text fs-4 fw-bold">{{ $pinjam->tanggal_kembali->diffForhumans() }}
-                                    </p>
+                                    <p class="card-text fs-4 fw-bold">-</p>
                                     <p>Jangan sampai telat ya!</p>
                                 @endif
                             </div>
@@ -50,22 +52,48 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($pinjam as $item)
+                            @forelse ($pinjams as $item)
                                 <tr>
-                                    <td>{{ $item->title }}</td>
-                                    <td>{{ $item->tanggal_pinjam }}</td>
-                                    <td>{{ $item->tanggal_kembali }}</td>
-                                    <td>{{ $item->status }}</td>
+                                    <td>{{ $item->buku->title }}</td>
+                                    <td>{{ $item->buku->author }}</td>
+                                    <td>{{ $item->tanggal_pinjam->translatedFormat('d F Y') }}</td>
+                                    @if ($item->tanggal_kembali === null)
+                                        <td class="fw-medium">Belum disetujui oleh guru</td>
+                                    @else
+                                        <td>{{ $item->tanggal_kembali->translatedFormat('d F Y') }}</td>
+                                    @endif
+                                    <td>
+                                        @switch($item->status)
+                                            @case('menunggu_persetujuan')
+                                                <span class="badge bg-warning">Menunggu Persetujuan</span>
+                                            @break
+
+                                            @case('dipinjam')
+                                                <span class="badge bg-primary">Dipinjam</span>
+                                            @break
+
+                                            @case('dikembalikan')
+                                                <span class="badge bg-success">Dikembalikan</span>
+                                            @break
+
+                                            @case('terlambat')
+                                                <span class="badge bg-danger">Terlambat</span>
+                                            @break
+
+                                            @default
+                                                <span class="badge bg-secondary">-</span>
+                                        @endswitch
+                                    </td>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5" class="text-center text-muted">Belum ada riwayat peminjaman</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted">Belum ada riwayat peminjaman</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

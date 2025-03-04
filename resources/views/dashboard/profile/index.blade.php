@@ -3,13 +3,18 @@
 @section('container')
     <div class="container my-5">
         <div class="row justify-content-center">
+            @if (Auth::user()->banned_until && now()->lessThan(Auth::user()->banned_until))
+                <p class="text-danger">Anda dilarang meminjam buku hingga
+                    {{ Auth::user()->banned_until->translatedFormat('d F Y') }}.</p>
+            @endif
+
             <div class="col-lg-6">
                 <div class="card border-0 shadow rounded-4">
                     <div class="card-body text-center p-3">
 
                         <!-- Avatar -->
                         <div class="mb-3">
-                            <img src="{{ $user->image ? asset('storage/'. $user->image) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=0D6EFD&color=fff&size=150&length=1' }}"
+                            <img src="{{ $user->image ? asset('storage/' . $user->image) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=0D6EFD&color=fff&size=150&length=1' }}"
                                 class="rounded-circle shadow-sm border" width="120" height="120" alt="User Avatar">
                         </div>
 

@@ -28,32 +28,37 @@
                                         <td>{{ $item->tanggal_kembali->translatedFormat('d F Y') }}</td>
                                     @endif
                                     <td>
-                                        @if ($item->status === 'dipinjam')
-                                            <span class="badge bg-primary">Dipinjam</span>
-                                        @endif
-                                        @if ($item->status === 'ditolak')
-                                            <span class="badge bg-danger">Ditolak</span>
-                                        @endif
-                                        @if ($item->status === 'menunggu_persetujuan')
-                                            <span class="badge bg-secondary">Menunggu Persetejuan</span>
-                                        @endif
-                                        @if ($item->status === 'dikembalikan')
-                                            <span class="badge bg-success">Dikembalikan</span>
-                                        @endif
-                                        @if ($item->status === 'terlambat')
-                                            <span class="badge bg-danger">Terlambat</span>
-                                        @endif
+                                        @switch($item->status)
+                                            @case('menunggu_persetujuan')
+                                                <span class="badge bg-warning">Menunggu Persetujuan</span>
+                                            @break
+
+                                            @case('dipinjam')
+                                                <span class="badge bg-primary">Dipinjam</span>
+                                            @break
+
+                                            @case('dikembalikan')
+                                                <span class="badge bg-success">Dikembalikan</span>
+                                            @break
+
+                                            @case('terlambat')
+                                                <span class="badge bg-danger">Terlambat</span>
+                                            @break
+
+                                            @default
+                                                <span class="badge bg-secondary">-</span>
+                                        @endswitch
                                     </td>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5" class="text-center text-muted">Belum ada riwayat peminjaman</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted">Belum ada riwayat peminjaman</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

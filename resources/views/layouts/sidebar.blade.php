@@ -4,29 +4,42 @@
         <h5 class="fw-bold">Perpustakaan</h5>
         <hr class="border-light">
         <ul class="nav flex-column">
+            @if (Auth::user()->role === 'siswa')
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('dashboard') ? 'text-primary fw-bold' : 'text-light' }}"
+                        href="{{ route('dashboard') }}">
+                        <i class="bi bi-house-door"></i> Beranda
+                    </a>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('dashboard') ? 'text-primary fw-bold' : 'text-light' }}"
+                        href="{{ route('admin') }}">
+                        <i class="bi bi-house-door"></i> Beranda
+                    </a>
+                </li>
+            @endif
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('dashboard') ? 'text-primary fw-bold' : 'text-light' }}"
-                    href="{{ route('dashboard') }}">
-                    <i class="bi bi-house-door"></i> Beranda
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('dashboard/buku*') ? 'text-primary fw-bold' : 'text-light' }}" href="{{ route('dashbook') }}">
+                <a class="nav-link {{ request()->is('dashboard/buku*') ? 'text-primary fw-bold' : 'text-light' }}"
+                    href="{{ route('dashbook') }}">
                     <i class="bi bi-search"></i> Cari Buku
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('dashboard/pinjaman-buku*') ? 'text-primary fw-bold' : 'text-light' }}" href="{{ route('siswa-pinjam') }}">
+                <a class="nav-link {{ request()->is('dashboard/pinjaman-buku*') ? 'text-primary fw-bold' : 'text-light' }}"
+                    href="{{ route('siswa-pinjam') }}">
                     <i class="bi bi-book"></i> Buku Pinjaman
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('dashboard/riwayat*') ? 'text-primary fw-bold' : 'text-light' }}" href="{{ route('riwayat') }}">
+                <a class="nav-link {{ request()->is('dashboard/riwayat*') ? 'text-primary fw-bold' : 'text-light' }}"
+                    href="{{ route('riwayat') }}">
                     <i class="bi bi-clock-history"></i> Riwayat
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('dashboard/profile*') ? 'text-primary fw-bold' : 'text-light' }}" href="{{ route('profile') }}">
+                <a class="nav-link {{ request()->is('dashboard/profile*') ? 'text-primary fw-bold' : 'text-light' }}"
+                    href="{{ route('profile') }}">
                     <i class="bi bi-gear"></i> Pengaturan
                 </a>
             </li>
@@ -49,11 +62,21 @@
     </div>
     <div class="offcanvas-body">
         <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link text-light" href="{{ route('dashboard') }}">
-                    <i class="bi bi-house-door"></i> Beranda
-                </a>
-            </li>
+            @if (Auth::user()->role === 'siswa')
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('dashboard') ? 'text-primary fw-bold' : 'text-light' }}"
+                        href="{{ route('dashboard') }}">
+                        <i class="bi bi-house-door"></i> Beranda
+                    </a>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('dashboard') ? 'text-primary fw-bold' : 'text-light' }}"
+                        href="{{ route('admin') }}">
+                        <i class="bi bi-house-door"></i> Beranda
+                    </a>
+                </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link text-light" href="{{ route('dashbook') }}">
                     <i class="bi bi-search"></i> Cari Buku
