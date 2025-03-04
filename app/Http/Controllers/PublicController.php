@@ -9,7 +9,7 @@ class PublicController extends Controller
 {
     public function index()
     {
-        $books = Buku::all();
+        $books = Buku::orderBy('id')->get();
         return view('welcome',compact('books'));
     }
 }

@@ -85,9 +85,12 @@ class ChapterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Chapter $chapter)
     {
-        //
+        $chapter->ceritas()->detach();
+        $chapter->bukus()->detach();
+        $chapter->delete();
+        return redirect()->back()->with('success', 'chapter berhasil di hapus');
     }
 
     public function view_chapter(Chapter $chapter)

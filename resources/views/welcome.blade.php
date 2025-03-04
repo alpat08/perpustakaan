@@ -11,7 +11,7 @@
             hidup Anda."</p>
 
         <div class="row">
-            @foreach ($books as $book)
+            @forelse ($books as $book)
                 <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in">
                     <div class="card shadow-lg border-0 rounded hover-effect">
                         <div class="image-container">
@@ -26,7 +26,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <h2 class="text-center text-secondary text-decoration-underline">Belum Ada Buku.</h2>
+            @endforelse
         </div>
     </div>
 
