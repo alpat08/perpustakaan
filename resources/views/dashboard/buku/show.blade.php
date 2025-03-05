@@ -37,10 +37,10 @@
             @else
                 @if ($userPinjaman)
                     @if (Auth::user()->pinjam->buku_id === $buku->id)
-                        <button type="submit" class="btn btn-secondary float-end" disabled>Sudah Dipinjam</button>
-                    @else
                         <button type="submit" class="btn btn-secondary float-end" disabled>Hanya Bisa Meminjam 1
                             Buku</button>
+                    @else
+                        <button type="submit" class="btn btn-secondary float-end" disabled>Sudah Dipinjam</button>
                     @endif
                 @else
                     <button type="submit" class="btn btn-success float-end">Pinjam Buku</button>

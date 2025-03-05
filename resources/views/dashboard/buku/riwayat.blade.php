@@ -46,7 +46,7 @@
                                             @break
 
                                             @default
-                                                <span class="badge bg-secondary">-</span>
+                                                <span class="badge bg-secondary">Ditolak</span>
                                         @endswitch
                                     </td>
                                 </tr>
