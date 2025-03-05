@@ -44,7 +44,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link fs-5 {{ Request()->is('dashboard') ? 'text-primary fw-bold' : '' }}"
-                                    href="{{ route('dashboard') }}">Dashboard Siswa</a>
+                                    href="{{ route('profile') }}">Dashboard Siswa</a>
                             </li>
                         @endif
                         @if (Auth::user()->role === 'admin')

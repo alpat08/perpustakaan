@@ -41,7 +41,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/dashboard/profile/password-update', [DashboardController::class, 'update_password'])->name('update-password');
         Route::get('/dashboard/profile/verify', [DashboardController::class, 'verify'])->name('verify');
         Route::post('/dashboard/profile/check-password', [DashboardController::class, 'check'])->name('check-password');
-
+        
+        Route::get('/dashboard/{chapter}/show', [ChapterController::class, 'view_chapter'])->name('view_isi');
         Route::post('/dashboard/buku/pinjam', [PinjamController::class, 'store'])->name('pinjam');
         Route::post('/dashboard/buku/pinjam/update', [PinjamController::class, 'update'])->name('pinjam-update');
         

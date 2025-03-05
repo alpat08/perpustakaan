@@ -1,11 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
     <div class="container d-flex align-items-center justify-content-between">
-        <button class="navbar-toggler border-0 d-md-none" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#sidebar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        @if (Auth::check())
+            <button class="navbar-toggler border-0 d-md-none" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#sidebar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        @else
+            <button class="navbar-toggler border-0 d-md-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        @endif
         <div class="d-flex justify-content-between w-100 align-items-center">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#top">
                 <img src="{{ asset('img/logo.png') }}" style="max-width: 100px">
             </a>
 

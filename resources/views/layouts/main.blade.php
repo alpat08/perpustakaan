@@ -31,7 +31,7 @@
     </style>
 </head>
 
-<body class="bg-secondary-subtle">
+<body class="bg-secondary-subtle" id="top">
 
 
     @include('layouts.header')

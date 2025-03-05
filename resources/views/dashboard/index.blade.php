@@ -13,7 +13,7 @@
                                     <h5 class="card-title"> Buku Dipinjam</h5>
                                     {{-- @dd($pinjam) --}}
                                     @if (Auth::user()->pinjamAktif)
-                                        <p class="card-text fs-4 fw-bold">{{ $pinjam->buku->title }}</p>
+                                        <p class="card-text fs-4 fw-bold">{{ $pinjamss->buku->title }}</p>
                                         <p>Sedang dipinjam saat ini</p>
                                     @else
                                         <p class="card-text fs-6 fw-bold">Belum meminjam buku</p>

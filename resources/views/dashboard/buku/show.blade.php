@@ -26,7 +26,6 @@
                 </p>
             </div>
         </div>
-        {{-- @if (!Auth::user()->pinjam) --}}
         <form action="{{ route('pinjam') }}" method="post">
             @csrf
             <input type="hidden" name="buku_id" value="{{ $buku->id }}">
@@ -46,14 +45,21 @@
                 <button type="submit" class="btn btn-success float-end">Pinjam Buku</button>
             @endif
         </form>
-        {{-- @endif --}}
         {{-- @dd(Auth::user()->pinjam && (Auth::user()->pinjam->status === 'dipinjam' && Auth::user()->pinjam->buku_id === $buku->id)) --}}
-        @if (Auth::user()->pinjam &&
-                (Auth::user()->pinjam->status === 'dipinjam' && Auth::user()->pinjam->buku_id === $buku->id))
-            <div class="row justify-content-center mt-4">
-                @foreach ($chapter as $item)
-                    <h5 class="border-top pt-3 text-center fw-normal">{{ $item }}</h5>
-                @endforeach
+        @if (Auth::user()->pinjamAktif)
+            <div class="table-responsive mt-5">
+                <table class="table table-striped table-hover table-bordered align-middle">
+                    <tbody class="table-group-divider">
+                        @foreach ($chapter as $item)
+                            <tr>
+                                <td>Chapter: {{ $item->name }}</td>
+                                <td>
+                                    <a href="{{route('view_isi', $item->id)}}" class="btn btn-sm btn-primary"><i class="bi bi-eye"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         @endif
 

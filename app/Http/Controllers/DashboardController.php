@@ -35,7 +35,7 @@ class DashboardController extends Controller
         }
         // dd($daysLeft);
 
-        return view('dashboard.index', compact('pinjam', 'pinjams', 'pesan'));
+        return view('dashboard.index', compact('pinjam', 'pinjams', 'pesan', 'pinjamss'));
     }
 
     public function buku(Request $request)
@@ -47,9 +47,7 @@ class DashboardController extends Controller
 
     public function show(Buku $buku)
     {
-        $chapter = $buku->chapters->flatMap(function ($item) {
-            return $item->ceritas->pluck('isi');
-        });
+        $chapter = $buku->chapters;
         $userPinjaman = Auth::user()->pinjam()->whereIn('status', ['menunggu_persetujuan', 'dipinjam'])->exists();
         // dd($chapter);
         return view('dashboard.buku.show', compact('buku', 'chapter', 'userPinjaman'));
