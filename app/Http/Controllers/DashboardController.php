@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $pinjams = Pinjam::where('user_id', Auth::id())->with('buku')->get();
         // dd($pinjam);
         $pinjamss = Auth::user()->pinjam()->where('status', 'dipinjam')->latest()->first();
-        if (!$pinjam || !$pinjam->tanggal_kembali) {
+        if (!$pinjamss || !$pinjamss->tanggal_kembali) {
             $pesan = "Belum ada peminjaman aktif";
         } else {
             $daysLeft = round(now()->diffInDays($pinjamss->tanggal_kembali, false));
