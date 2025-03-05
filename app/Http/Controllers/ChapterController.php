@@ -97,10 +97,19 @@ class ChapterController extends Controller
         $ceritas = $chapter->ceritas;
 
         return view('admin.buku.view_cerita', compact('ceritas'));
+
     }
 
     public function edit_chapter(Chapter $chapter)
     {
         return view('admin.buku.edit_chapter', compact('chapter'));
+    }
+
+    public function view_isi(Chapter $chapter)
+    {
+        $ceritas = $chapter->ceritas;
+        // dd($chapter);
+
+        return view('admin.buku.view_cerita', compact('ceritas'));
     }
 }
