@@ -1,23 +1,17 @@
-@if (Auth::user()->role === 'admin')
-    @extends('layouts.admin')
+@extends(Auth::user()->role === 'admin' ? 'layouts.admin' : 'layouts.main')
 
-    @section('container')
-        <div class="container mt-4">
-            <div class="row justify-content-center mt-4">
+@section('container')
+    <div class="container mt-4">
+        <div class="row justify-content-center mt-4">
+            @if (Auth::user()->role === 'admin')
                 <h5>{{ $cerita->isi }}</h5>
-            </div>
-            <a href="{{ route('buku.index') }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ route('buku.index') }}" class="btn btn-secondary">Kembali</a>
+            @else
+                @foreach ($ceritas as $item)
+                    <h5>{{ $item->isi }}</h5>
+                @endforeach
+                <a href="{{ route('siswa-pinjam') }}" class="btn btn-secondary w-auto me-auto">Kembali</a>
+            @endif
         </div>
-    @endsection
-@else
-    @extends('layouts.main')
-
-    @section('container')
-        <div class="container mt-4">
-            <div class="row justify-content-center my-4">
-                <h5>{{ $cerita->isi }}</h5>
-            </div>
-            <a href="{{ route('siswa-pinjam') }}" class="btn btn-secondary">Kembali</a>
-        </div>
-    @endsection
-@endif
+    </div>
+@endsection
