@@ -11,8 +11,8 @@
             hidup Anda."</p>
         <form class="row gap-2 mb-3">
             <div class="col-12 col-md-12">
-                <input class="rounded-3 border-1 p-2" type="search" name="search" id="search"
-                    placeholder="Search" autocomplete="off" />
+                <input class="rounded-3 border-1 p-2" type="search" name="search" id="search" placeholder="Search"
+                    autocomplete="off" />
                 <button class="btn btn-outline-success my-2" type="submit">
                     Search
                 </button>

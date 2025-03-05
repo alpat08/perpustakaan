@@ -24,7 +24,7 @@
                                     <form action="{{ route('genre.destroy', $genre->id) }}" method="post" class="d-inline">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Delete</button>
+                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Apakah yakin ingin menghapus genre ini?')"><i class="bi bi-trash"></i> Delete</button>
                                     </form>
                                 </td>
                             </tr>

@@ -38,7 +38,7 @@
                 <div class="mb-3">
                     <label for="role" class="form-label">Role</label>
                     <select class="form-select @error('role') is-invalid @enderror" name="role" id="role">
-                        <option selected disabled>Select one</option>
+                        <option selected disabled @selected(old('role', $user->role))>{{old('role', $user->role)}}</option>
                         <option value="guru">Guru</option>
                         <option value="siswa">Siswa</option>
                         @error('role')

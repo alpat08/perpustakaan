@@ -6,7 +6,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         @else
-            <button class="navbar-toggler border-0 d-md-none" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>

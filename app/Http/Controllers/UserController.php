@@ -99,7 +99,7 @@ class UserController extends Controller
             ]);
             return redirect()->route('user.index')->with('success', 'Berhasil mengedit user');
         } catch(\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal mengedit user');
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
