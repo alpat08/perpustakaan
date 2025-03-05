@@ -6,7 +6,7 @@
             <h2 class="card-title mb-4 text-center">Selamat Datang, {{ Auth::user()->name }}</h2>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 my-3">
                     <div class="card bg-primary text-white p-3">
                         <div class="card-body">
                             <h5>Total Pengguna</h5>
@@ -14,7 +14,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 my-3">
                     <div class="card bg-success text-white p-3">
                         <div class="card-body">
                             <h5>Buku Dipinjam</h5>

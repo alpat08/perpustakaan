@@ -7,7 +7,7 @@
         </div>
         <h1 class="text-center mb-4 fw-bold text-primary" data-aos="zoom-in"><i class="bi bi-book-half"></i> Koleksi Buku
             Terbaik untuk Anda</h1>
-        <p class="text-center text-muted" data-aos="zoom-in">📚 "Membaca adalah jendela dunia, satu halaman bisa mengubah
+        <p class="text-center text-muted" data-aos="zoom-in">"Membaca adalah jendela dunia, satu halaman bisa mengubah
             hidup Anda."</p>
         <form class="row gap-2 mb-3">
             <div class="col-12 col-md-12">
@@ -81,7 +81,7 @@
                     class="bi bi-instagram"></i> Instagram</a>
             <a href="https://www.twitter.com" data-aos="zoom-in" class="btn btn-info me-2"><i class="bi bi-twitter"></i>
                 Twitter</a>
-            <a href="https://wa.me/123456789" data-aos="zoom-in" class="btn btn-success"><i class="bi bi-whatsapp"></i>
+            <a href="https://wa.me/089602225970" data-aos="zoom-in" class="btn btn-success"><i class="bi bi-whatsapp"></i>
                 WhatsApp</a>
         </div>
     </div>

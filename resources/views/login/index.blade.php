@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="container">
-        <div class="row justify-content-center my-4">
+        <div class="row justify-content-center my-4 text-center">
             <div class="card rounded-4 shadow-sm p-3 w-100 mx-auto" style="max-width: 400px">
                 <div class="card-body">
                     <h4 class="card-title text-center">Login</h4>
@@ -31,7 +31,7 @@
                             </div>
                         @enderror
 
-                        <button type="submit" class="btn btn-primary d-block mx-auto">Login</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
                     </form>
                 </div>
             </div>

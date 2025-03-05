@@ -12,4 +12,9 @@ class PublicController extends Controller
         $books = Buku::search(request(['search']))->orderBy("id")->simplePaginate(5);
         return view('welcome', compact('books'));
     }
+
+    public function real()
+    {
+        return view('rill');
+    }
 }

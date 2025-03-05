@@ -18,7 +18,7 @@
 
             @if (Auth::check())
                 <div class="d-lg-none d-flex align-items-center gap-2">
-                    <h5 class="fw-bold mb-0">{{ auth()->user()->name }}</h5>
+                    {{-- <h5 class="fw-bold mb-0">{{ auth()->user()->name }}</h5> --}}
                     <a href="{{ route('profile') }}">
                         <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=0D6EFD&color=fff&size=150&length=1' }}"
                             class="rounded-circle shadow-sm border" width="40" height="40" alt="User Avatar">
@@ -46,7 +46,7 @@
 
                 @if (Auth::check())
                     <li class="nav-item d-none d-lg-flex align-items-center gap-2">
-                        <h5 class="fw-bold mb-0">{{ auth()->user()->name }}</h5>
+                        {{-- <h5 class="fw-bold mb-0">{{ auth()->user()->name }}</h5> --}}
                         <a href="{{ route('profile') }}">
                             <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=0D6EFD&color=fff&size=150&length=1' }}"
                                 class="rounded-circle shadow-sm border" width="40" height="40" alt="User Avatar">

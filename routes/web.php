@@ -14,6 +14,8 @@ use App\Http\Controllers\DashboardController;
 // Route untuk halaman utama (bisa diakses siapa saja)
 Route::get('/', [PublicController::class, 'index'])->name('public');
 
+Route::get('/fajar-is-real', [PublicController::class, 'real'])->name('fajar-is-real');
+
 // Route untuk pengguna yang belum login (guest)
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
