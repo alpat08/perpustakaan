@@ -1,5 +1,5 @@
 <!-- Sidebar untuk Tablet & Desktop -->
-<div class="d-none d-md-block bg-dark text-white vh-100 position-sticky" style="width: 250px;">
+<div class="d-none d-md-block bg-dark text-white vh-100 position-fixed" style="width: 250px;">
     <div class="p-3">
         <h5 class="fw-bold">Perpustakaan</h5>
         <hr class="border-light">

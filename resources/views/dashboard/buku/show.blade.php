@@ -30,19 +30,21 @@
             @csrf
             <input type="hidden" name="buku_id" value="{{ $buku->id }}">
             {{-- @dd(Auth::user()->pinjam->buku_id === $buku->id) --}}
-            @if ($userPinjaman)
-                @if (Auth::user()->pinjam->buku_id === $buku->id)
-                    <button type="submit" class="btn btn-secondary float-end" disabled>Sudah Dipinjam</button>
-                @else
-                    <button type="submit" class="btn btn-secondary float-end" disabled>Hanya Bisa Meminjam 1 Buku</button>
-                @endif
-                @if (Auth::user()->banned_until && now()->lessThan(Auth::user()->banned_until))
-                    <div class="alert alert-warning">
-                        Anda tidak bisa meminjam buku hingga {{ Auth::user()->banned_until->translatedFormat('d F Y') }}.
-                    </div>
-                @endif
+            @if (Auth::user()->banned_until && now()->lessThan(Auth::user()->banned_until))
+                <div class="alert alert-warning mt-3">
+                    Anda tidak bisa meminjam buku hingga {{ Auth::user()->banned_until->translatedFormat('d F Y') }}.
+                </div>
             @else
-                <button type="submit" class="btn btn-success float-end">Pinjam Buku</button>
+                @if ($userPinjaman)
+                    @if (Auth::user()->pinjam->buku_id === $buku->id)
+                        <button type="submit" class="btn btn-secondary float-end" disabled>Sudah Dipinjam</button>
+                    @else
+                        <button type="submit" class="btn btn-secondary float-end" disabled>Hanya Bisa Meminjam 1
+                            Buku</button>
+                    @endif
+                @else
+                    <button type="submit" class="btn btn-success float-end">Pinjam Buku</button>
+                @endif
             @endif
         </form>
         {{-- @dd(Auth::user()->pinjam && (Auth::user()->pinjam->status === 'dipinjam' && Auth::user()->pinjam->buku_id === $buku->id)) --}}
@@ -54,7 +56,8 @@
                             <tr>
                                 <td>Chapter: {{ $item->name }}</td>
                                 <td>
-                                    <a href="{{route('view_isi', $item->id)}}" class="btn btn-sm btn-primary"><i class="bi bi-eye"></i></a>
+                                    <a href="{{ route('view_isi', $item->id) }}" class="btn btn-sm btn-primary"><i
+                                            class="bi bi-eye"></i></a>
                                 </td>
                             </tr>
                         @endforeach

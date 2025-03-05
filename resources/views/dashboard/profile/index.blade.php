@@ -4,7 +4,7 @@
     <div class="container my-5">
         <div class="row justify-content-center">
             @if (Auth::user()->banned_until && now()->lessThan(Auth::user()->banned_until))
-                <p class="text-danger">Anda dilarang meminjam buku hingga
+                <p class="text-danger alert alert-warning w-75 text-center">Anda dilarang meminjam buku hingga
                     {{ Auth::user()->banned_until->translatedFormat('d F Y') }}.</p>
             @endif
 
