@@ -96,9 +96,8 @@ class ChapterController extends Controller
     {
         $ceritas = $chapter->ceritas;
 
-        foreach ($ceritas as $cerita) {
-            return view('admin.buku.view_cerita', compact('cerita'));
-        };
+        return view('admin.buku.view_cerita', compact('ceritas'));
+
     }
 
     public function edit_chapter(Chapter $chapter)
