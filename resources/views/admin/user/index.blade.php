@@ -5,7 +5,7 @@
         <div class="card-body">
             <h4 class="card-title">Siswa</h4>
             <form class="float-end gap-3 d-flex">
-                <input type="text" name="search" class="form-control" placeholder="Search">
+                <input type="search" name="search" class="form-control" placeholder="Search" autocomplete="off">
                 <button class="btn btn-success"><i class="bi bi-search"></i></button>
                 <a href="{{ route('user.index') }}" class="btn btn-primary">Clear</a>
             </form>
