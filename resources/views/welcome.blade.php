@@ -20,6 +20,31 @@
             </div>
         </form>
 
+        <div class="row my-5">
+            <h2>Buku yang sering dipinjam</h2>
+            <hr class="mb-4">
+            @forelse ($pinjam as $book)
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in">
+                    <div class="card shadow-lg border-0 rounded hover-effect">
+                        <div class="image-container">
+                            <img class="card-img-top" src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->title }}"
+                                style="background-size: cover; height: 280px;">
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-dark fw-bold"><i class="bi bi-book"></i> {{ $book->title }}</h5>
+                            <p class="card-text text-muted">{{ Str::limit($book->description, 100) }}</p>
+                            <a href="{{ route('show', $book->id) }}" class="btn btn-primary"><i class="bi bi-eye"></i> Baca
+                                Selengkapnya</a>
+                            <br>
+                            <small class="float-end mt-3">Telah di pinjam {{ $book->pinjam_count }}x</small>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <h2 class="text-center text-secondary text-decoration-underline">Belum Ada Buku.</h2>
+            @endforelse
+        </div>
+        <hr class="my-3">
         <div class="row mt-5">
             @forelse ($books as $book)
                 <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in">
@@ -81,7 +106,8 @@
                     class="bi bi-instagram"></i> Instagram</a>
             <a href="https://www.twitter.com" data-aos="zoom-in" class="btn btn-info me-2"><i class="bi bi-twitter"></i>
                 Twitter</a>
-            <a href="https://wa.me/089602225970" data-aos="zoom-in" class="btn btn-success"><i class="bi bi-whatsapp"></i>
+            <a href="https://wa.me/089602225970" data-aos="zoom-in" class="btn btn-success"><i
+                    class="bi bi-whatsapp"></i>
                 WhatsApp</a>
         </div>
     </div>

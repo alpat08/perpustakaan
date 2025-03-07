@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Models\Pinjam;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
@@ -10,7 +11,16 @@ class PublicController extends Controller
     public function index()
     {
         $books = Buku::search(request(['search']))->orderBy("id")->simplePaginate(5);
-        return view('welcome', compact('books'));
+        $pinjam = Buku::withCount(['pinjam' => function ($query) {
+            $query->where('status', 'menunggu_persetujuan')
+                ->orWhere('status', 'dipinjam')
+                ->orWhere('status', 'dikembalikan')
+                ->orWhere('status', 'ditolak')
+                ->orWhere('status', 'terlambat');
+        }])->orderByDesc('pinjam_count')->limit(5)->get();
+
+        // dd($pinjam);
+        return view('welcome', compact('books', 'pinjam'));
     }
 
     public function real()

@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::where('role', 'siswa')->orWhere('role', 'guru')->get();
+        $user = User::where('role', 'siswa')->orWhere('role', 'guru')->orderByDesc('role')->paginate(10);
         return view("admin.user.index", compact('user'));
     }
 
@@ -51,7 +51,7 @@ class UserController extends Controller
                 'role' => $request->role
             ]);
             return redirect()->route('user.index')->with('success', 'Berhasil menambahkan user');
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal menambahkan user');
         }
     }
@@ -69,7 +69,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.user.edit', compact('user'));   
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -98,7 +98,7 @@ class UserController extends Controller
                 'role' => $request->role
             ]);
             return redirect()->route('user.index')->with('success', 'Berhasil mengedit user');
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
