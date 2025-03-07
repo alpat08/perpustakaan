@@ -27,7 +27,7 @@
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->role }}</td>
                                 <td>
-                                    <a href="{{ route('user.edit', $item->id) }}" class="btn btn-sm btn-warning"><i
+                                    <a href="{{ route('user.edit', $item->id) }}" class="btn btn-sm btn-warning my-1"><i
                                             class="bi bi-pencil-square"></i></a>
                                     <form action="{{ route('user.destroy', $item->id) }}" method="post" class="d-inline">
                                         @csrf
