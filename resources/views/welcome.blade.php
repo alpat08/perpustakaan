@@ -11,12 +11,12 @@
             hidup Anda."</p>
         <form class="row gap-2 mb-3">
             <div class="col-12 col-md-12">
-                <input class="rounded-3 border-1 p-2" type="search" name="search" id="search" placeholder="Search"
+                <input data-aos="zoom-in" class="rounded-3 border-1 p-2" type="search" name="search" id="search" placeholder="Search"
                     autocomplete="off" />
-                <button class="btn btn-outline-success my-2" type="submit">
+                <button data-aos="zoom-in" class="btn btn-outline-success my-2" type="submit">
                     Search
                 </button>
-                <a href="{{ route('public') }}" class="btn btn-secondary">Clear</a>
+                <a href="{{ route('public') }}" data-aos="zoom-in" class="btn btn-secondary">Clear</a>
             </div>
         </form>
 

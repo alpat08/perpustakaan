@@ -37,18 +37,18 @@
             @else
                 @if ($userPinjaman)
                     @if (Auth::user()->pinjam->buku_id === $buku->id)
-                        <button type="submit" class="btn btn-secondary float-end" disabled>Hanya Bisa Meminjam 1
-                            Buku</button>
-                    @else
                         <button type="submit" class="btn btn-secondary float-end" disabled>Sudah Dipinjam</button>
+                    @else
+                        <button type="submit" class="btn btn-secondary float-end" disabled>Hanya Bisa Meminjam 1 Buku</button>
                     @endif
                 @else
                     <button type="submit" class="btn btn-success float-end">Pinjam Buku</button>
                 @endif
             @endif
         </form>
-        {{-- @dd(Auth::user()->pinjam && (Auth::user()->pinjam->status === 'dipinjam' && Auth::user()->pinjam->buku_id === $buku->id)) --}}
-        @if (Auth::user()->pinjamAktif)
+        {{-- @dd(Auth::user()->pinjam && (Auth::user()->pinjam->status === 'dipinjam' && Auth::user()->pinjam->buku_id ===
+        $buku->id)) --}}
+        @if (Auth::user()->pinjamAktif && Auth::user()->pinjam->buku_id === $buku->id)
             <div class="table-responsive mt-5">
                 <table class="table table-striped table-hover table-bordered align-middle">
                     <tbody class="table-group-divider">
