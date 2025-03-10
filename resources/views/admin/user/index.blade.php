@@ -11,7 +11,7 @@
             </form>
             <a href="{{ route('user.create') }}" class="btn btn-success my-3">Tambah</a>
 
-            {{ $user->links() }}
+            {{ $user->appends(request()->query())->links() }}
 
             <div class="table-responsive my-4">
                 <table class="table table-striped table-hover table-bordered align-middle">
@@ -51,7 +51,7 @@
                     </tbody>
                 </table>
             </div>
-            {{ $user->links() }}
+            {{ $user->appends(request()->query())->links() }}
         </div>
     </div>
 @endsection
