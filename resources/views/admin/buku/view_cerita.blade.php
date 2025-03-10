@@ -4,7 +4,9 @@
     <div class="container mt-4">
         <div class="row justify-content-center mt-4">
             @if (Auth::user()->role === 'admin')
-                <h5>{{ $cerita->isi }}</h5>
+                @foreach ($ceritas as $item)
+                    <h5>{{ $item->isi }}</h5>
+                @endforeach
                 <a href="{{ route('buku.index') }}" class="btn btn-secondary">Kembali</a>
             @else
                 @foreach ($ceritas as $item)
