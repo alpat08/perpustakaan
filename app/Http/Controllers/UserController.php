@@ -13,7 +13,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::where('role', 'siswa')->orWhere('role', 'guru')->orderByDesc('role')->paginate(10);
+        $user = User::search(request()->only('search'))
+            ->whereIn('role', ['siswa', 'guru'])
+            ->orderByDesc('role')
+            ->paginate(10);
         return view("admin.user.index", compact('user'));
     }
 

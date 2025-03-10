@@ -4,6 +4,11 @@
     <div class="card rounded-4 shadow-sm p-3">
         <div class="card-body">
             <h4 class="card-title">Siswa</h4>
+            <form class="float-end gap-3 d-flex">
+                <input type="text" name="search" class="form-control" placeholder="Search">
+                <button class="btn btn-success"><i class="bi bi-search"></i></button>
+                <a href="{{ route('user.index') }}" class="btn btn-primary">Clear</a>
+            </form>
             <a href="{{ route('user.create') }}" class="btn btn-success my-3">Tambah</a>
 
             {{ $user->links() }}
@@ -20,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        @foreach ($user as $key => $item)
+                        @forelse ($user as $key => $item)
                             <tr>
                                 <td>{{ $user->firstItem() + $key }}</td>
                                 <td>{{ $item->name }}</td>
@@ -38,7 +43,11 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">Data Tidak Ditemukan.</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
