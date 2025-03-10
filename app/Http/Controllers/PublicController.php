@@ -17,7 +17,11 @@ class PublicController extends Controller
                 ->orWhere('status', 'dikembalikan')
                 ->orWhere('status', 'ditolak')
                 ->orWhere('status', 'terlambat');
-        }])->orderByDesc('pinjam_count')->limit(5)->get();
+        }])->having('pinjam_count', '>', 0)
+            ->orderByDesc('pinjam_count')
+            ->limit(5)
+            ->get();
+
 
         // dd($pinjam);
         return view('welcome', compact('books', 'pinjam'));

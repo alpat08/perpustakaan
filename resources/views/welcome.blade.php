@@ -9,16 +9,6 @@
             Terbaik untuk Anda</h1>
         <p class="text-center text-muted" data-aos="zoom-in">"Membaca adalah jendela dunia, satu halaman bisa mengubah
             hidup Anda."</p>
-        <form class="row gap-2 mb-3">
-            <div class="col-12 col-md-12">
-                <input data-aos="zoom-in" class="rounded-3 border-1 p-2" type="search" name="search" id="search" placeholder="Search"
-                    autocomplete="off" />
-                <button data-aos="zoom-in" class="btn btn-outline-success my-2" type="submit">
-                    Search
-                </button>
-                <a href="{{ route('public') }}" data-aos="zoom-in" class="btn btn-secondary">Clear</a>
-            </div>
-        </form>
 
         <div class="row my-5">
             <h2>Buku yang sering dipinjam</h2>
@@ -45,6 +35,16 @@
             @endforelse
         </div>
         <hr class="my-3">
+        <form class="row gap-2 mb-3">
+            <div class="col-12 col-md-12">
+                <input data-aos="zoom-in" class="rounded-3 border-1 p-2" type="search" name="search" id="search"
+                    placeholder="Search" autocomplete="off" />
+                <button data-aos="zoom-in" class="btn btn-outline-success my-2" type="submit">
+                    Search
+                </button>
+                <a href="{{ route('public') }}" data-aos="zoom-in" class="btn btn-secondary">Clear</a>
+            </div>
+        </form>
         <div class="row mt-5">
             @forelse ($books as $book)
                 <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in">
