@@ -19,7 +19,7 @@ class AdminController extends Controller
         for ($i = 1; $i <= 12; $i++) {
             $data = Buku::withCount(['pinjam' => function ($query) use ($i) {
                 $query->whereMonth('created_at', $i)
-                    ->whereIn('status', ['menunggu_persetujuan', 'dipinjam', 'dikembalikan', 'ditolak', 'terlambat']);
+                    ->whereIn('status', ['dipinjam', 'dikembalikan', 'ditolak', 'terlambat']);
             }])->orderByDesc('pinjam_count')->get();
 
             $chartData[$i] = [
