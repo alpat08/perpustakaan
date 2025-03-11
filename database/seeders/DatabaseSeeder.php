@@ -59,27 +59,40 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $genres = [
-            'Isekai',
-            'Romance',
-            'Slice Of Life',
-            'Horror',
-            'Action',
-            'Comedy',
-            'Fantasy',
-            'Adventure',
-            'School',
-            'Yuri',
-            'Gore',
-            'Mystery',
-            'Mecha',
-            'Ecchi',
-            'Harem',
-            'Shounen',
-            'Supernatural',
+            'Action', 'Adventure', 'Alchemy', 'Aliens', 'Alternative History',
+            'Ancient Artifacts', 'Artificial Intelligence', 'Arranged Marriage',
+            'Bioengineering', 'Body Swapping', 'Boys Love (BL)', 'Brotherhood',
+            'Childhood Friends', 'Clowns', 'Comedy', 'Coming of Age',
+            'Conspiracy', 'Cooking', 'Cosmic Horror', 'Crime', 'Cult', 'Cultivation',
+            'Cyber Warfare', 'Cyberpunk', 'Dementia', 'Demon', 'Detective', 'Divorce',
+            'Drama', 'Dystopian', 'Ecchi', 'Egyptian Mythology', 'Espers', 'Espionage',
+            'Existentialism', 'Fairy Tale', 'Family', 'Fantasy', 'Fashion', 'Feudal Japan',
+            'Fishing', 'Folk Tales', 'Forbidden Love', 'Friendship', 'Gambling',
+            'Game', 'Gangsters', 'Giant Monsters', 'Giant Robots', 'Gladiator',
+            'Gore', 'Greek Mythology', 'Haunted House', 'Harem', 'Hentai', 'Historical',
+            'Horror', 'Hyper-Realistic Dreams', 'Idol', 'Isekai', 'Josei', 'Kaiju',
+            'Kids', 'Law', 'Living Dolls', 'Living Weapons', 'Love Triangle', 'Mad Scientists',
+            'Magic', 'Magical Girls', 'Mafia', 'Martial Arts', 'Mecha', 'Mecha Girls',
+            'Mecha Warfare', 'Medieval Fantasy', 'Medical', 'Military', 'Mind Control',
+            'Mafia', 'Marriage', 'Martial Arts', 'Medical', 'Mecha', 'Mecha Girls',
+            'Mecha Warfare', 'Medieval Fantasy', 'Military', 'Mind Control', 'Mistery',
+            'Mutants', 'Music', 'Mythical Creatures', 'Mythology', 'Native American',
+            'Ninja', 'Otome Game', 'Outlaws', 'Parallel Universe', 'Parody', 'Parenting',
+            'Philosophy', 'Photography', 'Pirates', 'Police', 'Post-Apocalypse',
+            'Post-Human Civilization', 'Post-Apocalyptic', 'Psychic Powers',
+            'Psychological', 'Puppeteers', 'Reincarnation', 'Reverse Harem',
+            'Robots', 'Romance', 'Samurai', 'Samurai Era', 'School', 'Sci-Fi',
+            'Secret Societies', 'Seinen', 'Sentient AI', 'Shoujo', 'Shoujo Ai',
+            'Shounen', 'Shounen Ai', 'Single Parent', 'Sisterhood', 'Slice Of Life',
+            'Space', 'Space Opera', 'Sports', 'Steampunk', 'Supernatural',
+            'Supernatural Investigation', 'Superpower', 'Survival', 'Tattoo',
+            'Teacher-Student Romance', 'Thriller', 'Time Travel', 'Tragedy',
+            'Utopian', 'Vampire', 'Viking', 'Virtual Reality', 'Weather Control',
+            'Western', 'Wuxia', 'Xianxia', 'Xuanhuan', 'Yaoi', 'Yuri', 'Zombies'
         ];
-
+        
         foreach ($genres as $genre) {
-            Genre::create(['name' => $genre]);
-        }
+            Genre::firstOrCreate(['name' => $genre]);
+        }        
     }
 }

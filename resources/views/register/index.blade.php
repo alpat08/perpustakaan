@@ -37,6 +37,7 @@
                         @enderror
                         </div>
 
+                        <p>Sudah Punya Akun? <a href="{{ route('login') }}">Login!</a></p>
                         <button class="btn btn-primary mt-2">Registrasi</button>
                     </form>
                 </div>

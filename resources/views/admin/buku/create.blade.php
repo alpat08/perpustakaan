@@ -10,7 +10,7 @@
                 <div class="mb-3">
                     <label for="title" class="form-label">Judul Buku</label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" name="title"
-                        id="title" value="{{old('title')}}"/>
+                        id="title" value="{{ old('title') }}" />
                     @error('title')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -21,7 +21,7 @@
                 <div class="mb-3">
                     <label for="author" class="form-label">Penulis</label>
                     <input type="text" class="form-control @error('author') is-invalid @enderror" name="author"
-                        id="author" value="{{old('author')}}"/>
+                        id="author" value="{{ old('author') }}" />
                     @error('author')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -41,7 +41,7 @@
 
                 <div class="mb-3">
                     <label for="isi" class="form-label">Isi Buku</label>
-                    <textarea class="form-control @error('isi') is-invalid @enderror" name="isi" id="isi" rows="3" >{{ old('isi') }}</textarea>
+                    <textarea class="form-control @error('isi') is-invalid @enderror" name="isi" id="isi" rows="3">{{ old('isi') }}</textarea>
                     @error('isi')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -51,10 +51,11 @@
 
                 <div class="mb-3">
                     <label for="chapter" class="form-label">Judul Chapter</label>
-                    <input type="text" name="chapter" class="form-control @error('chapter') is-invalid @enderror" id="chapter" value="{{old('chapter')}}">
+                    <input type="text" name="chapter" class="form-control @error('chapter') is-invalid @enderror"
+                        id="chapter" value="{{ old('chapter') }}">
                     @error('chapter')
                         <div class="invalid-feedback">
-                            {{$message}}
+                            {{ $message }}
                         </div>
                     @enderror
                 </div>
@@ -73,16 +74,21 @@
                 </div> --}}
 
                 <div class="mb-3">
-                    <label for="">Pilih Genre:</label>
-                    <br>
-                    @foreach ($genre as $item)
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="genre_{{ $item->id }}" name="genre[]"
-                                value="{{ $item->id }}" />
-                            <label class="form-check-label" for="genre_{{ $item->id }}">{{ $item->name }}</label>
-                        </div>
-                    @endforeach
+                    <label class="form-label fw-bold">Pilih Genre:</label>
+                    <div class="row">
+                        @foreach ($genre as $item)
+                            <div class="col-md-3 col-sm-6 col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="genre_{{ $item->id }}"
+                                        name="genre[]" value="{{ $item->id }}">
+                                    <label class="form-check-label"
+                                        for="genre_{{ $item->id }}">{{ $item->name }}</label>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
+
 
 
                 <div class="mb-3">
@@ -124,7 +130,7 @@
         //     fileWrapper.setAttribute("id", "image-" + fileIndex);
         //     fileWrapper.classList.add('mb-3', 'd-flex', 'gap-3');
 
-    
+
 
         //     // Buat elemen input file
         //     const fileInput = document.createElement('input');

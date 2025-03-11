@@ -24,6 +24,23 @@
                 </div>
             </div>
 
+            <div class="d-flex justify-content-between">
+                <select id="bulan" class="form-select w-auto">
+                    <option value="1">Januari</option>
+                    <option value="2">Februari</option>
+                    <option value="3">Maret</option>
+                    <option value="4">April</option>
+                    <option value="5">Mei</option>
+                    <option value="6">Juni</option>
+                    <option value="7">Juli</option>
+                    <option value="8">Agustus</option>
+                    <option value="9">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
+                </select>
+            </div>
+
             <div class="d-flex">
                 <div class="" style="width: 300px">
                     <canvas id="doughnut"></canvas>
@@ -40,83 +57,100 @@
 
     <script src="{{ asset('js/chart.umd.js') }}"></script>
     <script>
-        const doughnut = document.getElementById('doughnut');
-        const pie = document.getElementById('pie');
-        const bar = document.getElementById('bar');
+        // Ambil bulan saat ini secara otomatis
+        let defaultMonth = new Date().getMonth() + 1;
 
-        const chart1 = new Chart(doughnut, {
+        // Ambil data dari Laravel (semua bulan)
+        const chartData = @json($chartData);
+
+        // Set dropdown agar default ke bulan saat ini
+        document.getElementById('bulan').value = defaultMonth;
+
+        // Inisialisasi Chart.js dengan data bulan saat ini
+        const doughnut = document.getElementById('doughnut').getContext('2d');
+        let chart1 = new Chart(doughnut, {
             type: 'doughnut',
             data: {
-                labels: @json($labels),
+                labels: chartData[defaultMonth].labels, // Data bulan saat ini
                 datasets: [{
-                    label: 'Dipinjam',
-                    data: @json($data),
+                    label: 'Jumlah Peminjaman',
+                    data: chartData[defaultMonth].data,
                     backgroundColor: 'blue',
                     borderColor: 'white',
-                    borderWidth: 15
+                    borderWidth: 10
                 }]
             },
             options: {
+                responsive: true,
                 plugins: {
                     legend: {
                         display: false
                     },
-                    title: {
-                        display: true,
-                        text: 'Buku yang sering dipinjam'
-                    }
                 }
             }
         });
 
-        const chart2 = new Chart(pie, {
+        const pie = document.getElementById('pie').getContext('2d');
+        let chart2 = new Chart(pie, {
             type: 'pie',
             data: {
-                labels: @json($labels),
+                labels: chartData[defaultMonth].labels,
                 datasets: [{
-                    label: 'Dipinjam',
-                    data: @json($data),
+                    label: 'Jumlah Peminjaman',
+                    data: chartData[defaultMonth].data,
+                    backgroundColor: 'yellow',
+                    borderColor: 'white',
+                    borderWidth: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                }
+            }
+        });
+
+        const bar = document.getElementById('bar').getContext('2d');
+        let chart3 = new Chart(bar, {
+            type: 'bar',
+            data: {
+                labels: chartData[defaultMonth].labels,
+                datasets: [{
+                    label: 'Jumlah Peminjaman',
+                    data: chartData[defaultMonth].data,
                     backgroundColor: 'red',
                     borderColor: 'white',
                     borderWidth: 10
                 }]
             },
             options: {
+                responsive: true,
                 plugins: {
                     legend: {
                         display: false
                     },
-                    title: {
-                        display: true,
-                        text: 'Buku yang sering dipinjam'
-                    }
                 }
             }
         });
 
-        const chart3 = new Chart(bar, {
-            type: 'bar',
-            data: {
-                labels: @json($labels),
-                datasets: [{
-                    label: 'Dipinjam',
-                    data: @json($data),
-                    backgroundColor: 'green',
-                    borderColor: 'white',
-                    borderWidth: 10
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: 'Buku yang sering dipinjam'
-                    }
-                }
-            }
+        // Event listener untuk select bulan
+        document.getElementById('bulan').addEventListener('change', function() {
+            let selectedMonth = this.value;
+
+            chart1.data.labels = chartData[selectedMonth].labels;
+            chart1.data.datasets[0].data = chartData[selectedMonth].data;
+            chart1.update();
+
+            chart2.data.labels = chartData[selectedMonth].labels;
+            chart2.data.datasets[0].data = chartData[selectedMonth].data;
+            chart2.update();
+
+            chart3.data.labels = chartData[selectedMonth].labels;
+            chart3.data.datasets[0].data = chartData[selectedMonth].data;
+            chart3.update();
         });
     </script>
 @endsection

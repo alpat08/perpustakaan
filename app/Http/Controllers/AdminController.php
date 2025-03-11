@@ -13,18 +13,22 @@ class AdminController extends Controller
     {
         $user = User::where('role', 'siswa')->count();
         $pinjam = Pinjam::where('status', 'dipinjam')->count();
-        $chart = Buku::withCount(['pinjam' => function ($query) {
-            $query->where('status', 'menunggu_persetujuan')
-                ->orWhere('status', 'dipinjam')
-                ->orWhere('status', 'dikembalikan')
-                ->orWhere('status', 'ditolak')
-                ->orWhere('status', 'terlambat');
-        }])->orderByDesc('pinjam_count')->get();
-        $labels = $chart->pluck('title');
-        $data = $chart->pluck('pinjam_count');
-        // dd($labels, $data);
-        // return response()->json($data);
-        return view('admin.index', compact('user', 'pinjam', 'labels', 'data'));
+
+        $chartData = [];
+
+        for ($i = 1; $i <= 12; $i++) {
+            $data = Buku::withCount(['pinjam' => function ($query) use ($i) {
+                $query->whereMonth('created_at', $i)
+                    ->whereIn('status', ['menunggu_persetujuan', 'dipinjam', 'dikembalikan', 'ditolak', 'terlambat']);
+            }])->orderByDesc('pinjam_count')->get();
+
+            $chartData[$i] = [
+                'labels' => $data->pluck('title'),
+                'data' => $data->pluck('pinjam_count'),
+            ];
+        }
+
+        return view('admin.index', compact('user', 'pinjam', 'chartData'));
     }
 
     public function peminjaman()

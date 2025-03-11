@@ -15,7 +15,8 @@ class UserController extends Controller
     {
         $user = User::search(request()->only('search'))
             ->whereIn('role', ['siswa', 'guru'])
-            ->orderByDesc('role')
+            ->orderByRaw("FIELD(role, 'siswa', 'guru')")
+            ->orderBy('name', 'asc')
             ->paginate(10);
         return view("admin.user.index", compact('user'));
     }
