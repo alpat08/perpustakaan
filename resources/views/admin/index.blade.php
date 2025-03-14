@@ -39,6 +39,9 @@
                     <option value="11">November</option>
                     <option value="12">Desember</option>
                 </select>
+                <select id="tahun" class="form-select w-auto">
+                    <option value="1">Januari</option>
+                </select>
             </div>
 
             <div class="d-flex">
@@ -137,7 +140,7 @@
         });
 
         // Event listener untuk select bulan
-        document.getElementById('bulan').addEventListener('change', function() {
+        document.getElementById('bulan').addEventListener('change', function () {
             let selectedMonth = this.value;
 
             chart1.data.labels = chartData[selectedMonth].labels;

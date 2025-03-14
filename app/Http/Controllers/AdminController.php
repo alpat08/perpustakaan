@@ -13,7 +13,8 @@ class AdminController extends Controller
     {
         $user = User::where('role', 'siswa')->count();
         $pinjam = Pinjam::where('status', 'dipinjam')->count();
-
+        $tahun = Pinjam::whereIn('status', ['dipinjam', 'dikembalikan', 'ditolak', 'terlambat'])->get();
+        dd($tahun);
         $chartData = [];
 
         for ($i = 1; $i <= 12; $i++) {
