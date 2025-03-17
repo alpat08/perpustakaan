@@ -39,6 +39,11 @@
                     <option value="11">November</option>
                     <option value="12">Desember</option>
                 </select>
+                <select id="tahun" class="form-select w-auto">
+                    @foreach($tahunList as $tahun)
+                        <option value="{{ $tahun }}">{{ $tahun }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="d-flex">
@@ -137,7 +142,7 @@
         });
 
         // Event listener untuk select bulan
-        document.getElementById('bulan').addEventListener('change', function() {
+        document.getElementById('bulan').addEventListener('change', function () {
             let selectedMonth = this.value;
             
             chart1.data.labels = chartData[selectedMonth].labels;
@@ -152,5 +157,27 @@
             chart3.data.datasets[0].data = chartData[selectedMonth].data;
             chart3.update();
         });
+
+        document.getElementById('tahun').addEventListener('change', function () {
+            let selectedYear = this.value;
+            let selectedMonth = document.getElementById('bulan').value;
+
+            fetch(`/admin/chart-data?year=${selectedYear}&month=${selectedMonth}`)
+                .then(response => response.json())
+                .then(data => {
+                    chart1.data.labels = data.labels;
+                    chart1.data.datasets[0].data = data.data;
+                    chart1.update();
+
+                    chart2.data.labels = data.labels;
+                    chart2.data.datasets[0].data = data.data;
+                    chart2.update();
+
+                    chart3.data.labels = data.labels;
+                    chart3.data.datasets[0].data = data.data;
+                    chart3.update();
+                });
+        });
+
     </script>
 @endsection

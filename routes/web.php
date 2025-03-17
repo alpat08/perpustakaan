@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
     // Route khusus admin & guru
     Route::middleware(['role:admin,guru'])->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+        Route::get('/admin/chart-data', [AdminController::class, 'getChartData']);
 
         Route::get('/admin/peminjaman', [AdminController::class, 'peminjaman'])->name('peminjaman');
 

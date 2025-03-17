@@ -43,13 +43,19 @@
                 </div>
 
                 <div class="mb-3">
-                    @foreach ($genres as $genre)
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="genre_{{ $genre->id }}" name="genre[]"
-                                value="{{ $genre->id }}" {{ $buku->genres->contains($genre->id) ? 'checked' : '' }} />
-                            <label class="form-check-label" for="genre_{{ $genre->id }}">{{ $genre->name }}</label>
-                        </div>
-                    @endforeach
+                    <label class="form-label fw-bold">Pilih Genre:</label>
+                    <div class="row">
+                        @foreach ($genres as $item)
+                            <div class="col-md-3 col-sm-6 col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="genre_{{ $item->id }}"
+                                        name="genre[]" value="{{ $item->id }}">
+                                    <label class="form-check-label"
+                                        for="genre_{{ $item->id }}">{{ $item->name }}</label>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
 
                 <div class="mb-3">
