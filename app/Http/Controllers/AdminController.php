@@ -20,11 +20,13 @@ class AdminController extends Controller
             $data = Buku::withCount(['pinjam' => function ($query) use ($i) {
                 $query->whereMonth('created_at', $i)
                     ->whereIn('status', ['dipinjam', 'dikembalikan', 'ditolak', 'terlambat']);
-            }])->orderByDesc('pinjam_count')->get();
+            }])->havingRaw('pinjam_count > 0') // Hanya ambil buku dengan pinjaman lebih dari 0
+                ->orderByDesc('pinjam_count')
+                ->get();
 
             $chartData[$i] = [
-                'labels' => $data->pluck('title'),
-                'data' => $data->pluck('pinjam_count'),
+                'labels' => $data->pluck('title')->toArray(),
+                'data' => $data->pluck('pinjam_count')->toArray(),
             ];
         }
 

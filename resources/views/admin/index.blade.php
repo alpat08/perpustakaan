@@ -139,7 +139,7 @@
         // Event listener untuk select bulan
         document.getElementById('bulan').addEventListener('change', function() {
             let selectedMonth = this.value;
-
+            
             chart1.data.labels = chartData[selectedMonth].labels;
             chart1.data.datasets[0].data = chartData[selectedMonth].data;
             chart1.update();
